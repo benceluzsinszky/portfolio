@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
-import '../../styles/game_of_life/GameOfLife.css';
 import GameGrid from './GameGrid';
+import './GameOfLife.css';
 
 export interface State {
   size: number;
@@ -40,7 +40,7 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
-export default function App() {
+export default function GameOfLife() {
 
   const [state, dispatch] = useReducer(reducer, {
     size: 10,

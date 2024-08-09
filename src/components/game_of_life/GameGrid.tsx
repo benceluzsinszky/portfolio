@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import '../../styles/game_of_life/GameGrid.css';
+import './GameGrid.css';
 
 import { Action, State } from './GameOfLife';
 
