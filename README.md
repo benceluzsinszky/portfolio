@@ -1,3 +1,5 @@
-# Conway's Game of Life
+# Portfolio
 
-React Typescript implementation.
+My portfolio, hosted on GitHub Pages. This is a work in progress.
+
+
