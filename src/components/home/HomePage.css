@@ -1,0 +1,50 @@
+.card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 60px;
+    transition: 0.5s;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.card-container .card{
+    filter: brightness(0.1);
+    transition: 0.5s;
+}
+
+.card-container .card:hover{
+    filter: brightness(1);
+    transform: translateZ(150px) scale(1.2);
+}
+
+.card-container .card:hover + *{
+    filter: brightness(0.6);
+    transform: translateZ(100px) rotateY(40deg);
+}
+
+.card-container .card:hover + * + *{
+    filter: brightness(0.4);
+    transform: translateZ(50px) rotateY(20deg);
+}
+
+.card-container .card:hover + * + * + *{
+    filter: brightness(0.2);
+    transform: translateZ(20px) rotateY(10deg);
+}
+
+.card-container .card:has(+ *:hover){
+    filter: brightness(0.6);
+    transform: translateZ(100px) rotateY(-40deg);
+}
+
+.card-container .card:has(+ * + *:hover){
+    filter: brightness(0.4);
+    transform: translateZ(50px) rotateY(-20deg);
+}
+
+.card-container .card:has(+ * + * + *:hover){
+    filter: brightness(0.2);
+    transform: translateZ(20px) rotateY(-10deg);
+}
