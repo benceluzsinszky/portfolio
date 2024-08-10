@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://benceluzsinszky.github.io/game-of-life/",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
