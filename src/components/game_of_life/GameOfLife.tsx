@@ -113,50 +113,62 @@ export default function GameOfLife() {
   }, [state.gridArray]);
 
   return (
-    <>
-      <h1>Conway&apos;s Game of Life</h1>
-      <div className='info'>
-        <div className='info-text'>
-          <p>Generation:</p><p>{state.generation}</p>
+    <div className='panels'>
+      <div className='left-panel'/>
+      <div className='middle-panel'>
+        <h1>Conway&apos;s Game of Life</h1>
+        <div className='info'>
+          <div className='info-text'>
+            <p>Generation:</p><p>{state.generation}</p>
+          </div>
+          <div className='info-text'>
+            <p>Alive Cells:</p><p>{aliveCells}</p>
+          </div>
         </div>
-        <div className='info-text'>
-          <p>Alive Cells:</p><p>{aliveCells}</p>
+        <GameGrid
+          state={state}
+          dispatch={dispatch}
+          gridArrayToCss={gridArrayToCss} />
+        <div className='sliders'>
+          <div className='info-text'>
+            <p>Grid Size:</p><p>{state.size}</p>
+          </div>
+          <input
+            type="range"
+            min="5"
+            max="50"
+            step={0.01}
+            value={sliderSize}
+            onChange={handleSizeChange}
+          />
+          <div className='info-text'>
+            <p>Speed:</p><p>{state.speed}</p>
+          </div>
+          <input
+            type='range'
+            min='1'
+            max='10'
+            step={0.01}
+            value={sliderSpeed}
+            onChange={handleSpeedChange}
+          />
+        </div>
+        <div className='buttons'>
+          <button onClick={handleStart}>Start</button>
+          <button onClick={() => dispatch({ type: "STOP_RUNNING" })}>Stop</button>
+          <button onClick={handleClear}>Clear</button>
+          <button onClick={handleRandomize}>Random</button>
         </div>
       </div>
-      <GameGrid
-        state={state}
-        dispatch={dispatch}
-        gridArrayToCss={gridArrayToCss} />
-      <div className='sliders'>
-        <div className='info-text'>
-          <p>Grid Size:</p><p>{state.size}</p>
-        </div>
-        <input
-          type="range"
-          min="5"
-          max="50"
-          step={0.01}
-          value={sliderSize}
-          onChange={handleSizeChange}
-        />
-        <div className='info-text'>
-          <p>Speed:</p><p>{state.speed}</p>
-        </div>
-        <input
-          type='range'
-          min='1'
-          max='10'
-          step={0.01}
-          value={sliderSpeed}
-          onChange={handleSpeedChange}
-        />
+      <div className='right-panel'>
+        <h2>Description:</h2>
+        <p>The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input.</p>
+        <h2>Rules:</h2>
+        <p>1. Any live cell with fewer than two live neighbors dies, as if by underpopulation.</p>
+        <p>2. Any live cell with two or three live neighbors lives on to the next generation.</p>
+        <p>3. Any live cell with more than three live neighbors dies, as if by overpopulation.</p>
+        <p>4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</p>
       </div>
-      <div className='buttons'>
-        <button onClick={handleStart}>Start</button>
-        <button onClick={() => dispatch({ type: "STOP_RUNNING" })}>Stop</button>
-        <button onClick={handleClear}>Clear</button>
-        <button onClick={handleRandomize}>Random</button>
-      </div>
-    </>
+    </div>
   );
 };
