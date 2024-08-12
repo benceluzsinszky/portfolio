@@ -15,7 +15,7 @@ enum ActionType {
   SET_INFO2,
 }
 
-const reducer = (state: State, action: Action<ActionType>) => {
+const reducer = (state: State, action: Action<ActionType, number>) => {
   switch (action.type) {
     case ActionType.SET_INFO1:
       return { ...state, info1: { ...state.info1, value: action.payload } };

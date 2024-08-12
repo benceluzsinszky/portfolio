@@ -1,6 +1,6 @@
-export interface Action<T> {
-  type: T;
-  payload: number;
+export interface Action<ActionType, Payload> {
+  type: ActionType;
+  payload: Payload;
 }
 
 export interface InfoText {
