@@ -1,5 +1,10 @@
 import { useReducer, useState } from "react";
-import { Action, Button, InfoText, Slider } from "../../interfaces/interfaces";
+import {
+  ActionWithPayload,
+  Button,
+  InfoText,
+  Slider,
+} from "../../interfaces/interfaces";
 import Buttons from "../common/game_frame/Buttons";
 import "../common/game_frame/GameFrame.css";
 import InfoBox from "../common/game_frame/InfoBox";
@@ -15,7 +20,10 @@ enum ActionType {
   SET_INFO2,
 }
 
-const reducer = (state: State, action: Action<ActionType, number>) => {
+const reducer = (
+  state: State,
+  action: ActionWithPayload<ActionType, number>
+) => {
   switch (action.type) {
     case ActionType.SET_INFO1:
       return { ...state, info1: { ...state.info1, value: action.payload } };
