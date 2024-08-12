@@ -1,81 +1,48 @@
-import { useReducer, useState } from "react";
-import {
-  ActionWithPayload,
-  Button,
-  InfoText,
-  Slider,
-} from "../../interfaces/interfaces";
+import { useState } from "react";
+import { Button, Slider } from "../../interfaces/interfaces";
 import Buttons from "../common/game_frame/Buttons";
 import "../common/game_frame/GameFrame.css";
 import InfoBox from "../common/game_frame/InfoBox";
 import Sliders from "../common/game_frame/Sliders";
 import Simulation from "./Simulation";
 
-interface State {
-  info1: InfoText;
-  info2: InfoText;
-}
-
-enum ActionType {
-  SET_INFO1,
-  SET_INFO2,
-}
-
-const reducer = (
-  state: State,
-  action: ActionWithPayload<ActionType, number>
-) => {
-  switch (action.type) {
-    case ActionType.SET_INFO1:
-      return { ...state, info1: { ...state.info1, value: action.payload } };
-    case ActionType.SET_INFO2:
-      return { ...state, info2: { ...state.info2, value: action.payload } };
-    default:
-      return state;
-  }
-};
-
 export default function RockPaperScissors() {
   const [isRunning, setIsRunning] = useState(false);
-
-  const [state, dispatch] = useReducer(reducer, {
-    info1: { name: "Info 1", value: 1 },
-    info2: { name: "Info 2", value: 5 },
-  });
-
-  const [sliderInfo1, setSliderInfo1] = useState(10);
-  const [sliderInfo2, setSliderInfo2] = useState(5);
+  const [size, setSize] = useState(10);
+  const [sliderSize, setSliderSize] = useState(10);
+  const [speed, setSpeed] = useState(5);
+  const [sliderSpeed, setSliderSpeed] = useState(5);
 
   const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSliderInfo1(Number(event.target.value));
-    dispatch({
-      type: ActionType.SET_INFO1,
-      payload: parseInt(event.target.value),
-    });
+    setSliderSize(Number(event.target.value));
+    setSize(parseInt(event.target.value));
   };
 
   const handleSpeedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSliderInfo2(Number(event.target.value));
-    dispatch({
-      type: ActionType.SET_INFO2,
-      payload: parseInt(event.target.value),
-    });
+    setSliderSpeed(Number(event.target.value));
+    setSpeed(parseInt(event.target.value));
   };
 
   const createSliders = (): Array<Slider> => {
     return [
       {
-        infoText: state.info1,
+        infoText: {
+          name: "Group size :",
+          value: size,
+        },
         min: 5,
         max: 50,
-        value: sliderInfo1,
+        value: sliderSize,
         onChange: handleSizeChange,
       },
       {
-        infoText: state.info2,
+        infoText: {
+          name: "Speed :",
+          value: speed,
+        },
         min: 1,
         max: 10,
-        value: sliderInfo2,
+        value: sliderSpeed,
         onChange: handleSpeedChange,
       },
     ];
@@ -99,7 +66,13 @@ export default function RockPaperScissors() {
       <div className="left-panel" />
       <div className="middle-panel">
         <h1 className="game-title">Rock, Paper, Scissors</h1>
-        <InfoBox infoTexts={[state.info1, state.info2]} />
+        <InfoBox
+          infoTexts={[
+            { name: "Rocks alive", value: 0 },
+            { name: "Papers alive", value: 0 },
+            { name: "Scissors alive", value: 0 },
+          ]}
+        />
         <div className="game-div">
           <Simulation />
         </div>
