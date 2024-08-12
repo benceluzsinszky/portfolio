@@ -1,7 +1,9 @@
 import { useEffect, useReducer, useState } from "react";
-import { Action, InfoText } from "../../interfaces/interfaces";
+import { Action, Button, InfoText, Slider } from "../../interfaces/interfaces";
+import Buttons from "../common/game_frame/Buttons";
 import "../common/game_frame/GameFrame.css";
 import InfoBox from "../common/game_frame/InfoBox";
+import Sliders from "../common/game_frame/Sliders";
 import { ActionType } from "./Constants";
 import GameGrid from "./GameGrid";
 
@@ -94,6 +96,52 @@ export default function GameOfLife() {
     ];
   };
 
+  const createSliders = (): Array<Slider> => {
+    return [
+      {
+        infoText: {
+          name: "Grid Size :",
+          value: size,
+        },
+        min: 5,
+        max: 50,
+        value: sliderSize,
+        onChange: handleSizeChange,
+      },
+      {
+        infoText: {
+          name: "Speed :",
+          value: speed,
+        },
+        min: 1,
+        max: 10,
+        value: sliderSpeed,
+        onChange: handleSpeedChange,
+      },
+    ];
+  };
+
+  const createButtons = (): Array<Button> => {
+    return [
+      {
+        text: "Start",
+        onClick: handleStart,
+      },
+      {
+        text: "Stop",
+        onClick: () => dispatch({ type: ActionType.STOP }),
+      },
+      {
+        text: "Clear",
+        onClick: handleClear,
+      },
+      {
+        text: "Random",
+        onClick: handleRandomize,
+      },
+    ];
+  };
+
   useEffect(() => {
     const sumGridArray = grid.reduce((a: number, b: number) => a + b, 0);
     setAliveCells(sumGridArray);
@@ -114,40 +162,8 @@ export default function GameOfLife() {
           gridArray={grid}
           setGridArray={setGrid}
         />
-        <div className="sliders">
-          <div className="info-text">
-            <p>Grid Size:</p>
-            <p>{size}</p>
-          </div>
-          <input
-            type="range"
-            min="5"
-            max="50"
-            step={0.01}
-            value={sliderSize}
-            onChange={handleSizeChange}
-          />
-          <div className="info-text">
-            <p>Speed:</p>
-            <p>{speed}</p>
-          </div>
-          <input
-            type="range"
-            min="1"
-            max="10"
-            step={0.01}
-            value={sliderSpeed}
-            onChange={handleSpeedChange}
-          />
-        </div>
-        <div className="buttons">
-          <button onClick={handleStart}>Start</button>
-          <button onClick={() => dispatch({ type: ActionType.STOP })}>
-            Stop
-          </button>
-          <button onClick={handleClear}>Clear</button>
-          <button onClick={handleRandomize}>Random</button>
-        </div>
+        <Sliders sliders={createSliders()} />
+        <Buttons buttons={createButtons()} />
       </div>
       <div className="right-panel">
         <h2>Description:</h2>
