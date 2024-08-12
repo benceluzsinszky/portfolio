@@ -1,0 +1,34 @@
+.panels {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+}
+
+.panels > * {
+  width: calc(100vw / 3);
+}
+
+.middle-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-div {
+  border: 2px solid var(--mid-white);
+  min-width: calc(100vh / 2);
+  min-height: calc(100vh / 2);
+}
+
+.right-panel {
+  text-align: left;
+  text-wrap: wrap;
+  padding-right: 15px;
+}
+
+.right-panel h2 {
+  margin: 0;
+}

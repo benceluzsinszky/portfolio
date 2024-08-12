@@ -1,0 +1,29 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: calc(100vh / 2);
+}
+
+.info > div::after {
+  content: "";
+  width: 50%;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 95%;
+}
+
+.info-text p:first-child {
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: left;
+}
+
+.info-text p:last-child {
+  flex: 1;
+  text-align: right;
+}
