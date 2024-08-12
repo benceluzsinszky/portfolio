@@ -1,6 +1,6 @@
-export interface Action<ActionType, Payload> {
+export interface Action<ActionType, Payload = undefined> {
   type: ActionType;
-  payload: Payload;
+  payload?: Payload;
 }
 
 export interface InfoText {

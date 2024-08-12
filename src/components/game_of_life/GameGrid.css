@@ -1,29 +1,28 @@
 .game-grid {
-    border-collapse: collapse;
-    border: 2px solid var(--mid-white);
-    min-width: calc(100vh / 2);
-    min-height: calc(100vh / 2);
+  border-collapse: collapse;
+  min-width: calc(100vh / 2);
+  min-height: calc(100vh / 2);
 }
 
 .game-cell {
-    width: 10px;
-    height: 10px;
-    padding: 0;
-    transition: background-color 0.2s;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  transition: background-color 0.2s;
 }
 
 .game-cell.alive {
-    background-color: var(--mid-white);
+  background-color: var(--mid-white);
 }
 
 .game-cell.alive:hover {
-    background-color: var(--bright-white);
+  background-color: var(--bright-white);
 }
 
 .game-cell.dead {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .game-cell.dead:hover {
-    background-color: var(--bright-grey);
+  background-color: var(--bright-grey);
 }

@@ -1,25 +1,39 @@
 import { useEffect, useReducer, useState } from "react";
-import { Action, InfoText } from "../../interfaces/interfaces";
-import "../common/game_frame/GameFrame.css";
-import InfoBox from "../common/game_frame/InfoBox";
-import { ActionType } from "./Constants";
 import GameGrid from "./GameGrid";
 
 export interface State {
+  size: number;
+  speed: number;
   generation: number;
   isRunning: boolean;
+  gridArray: number[];
 }
 
-const reducer = (state: State, action: Action<ActionType>) => {
+export type Action =
+  | { type: "SET_SIZE"; size: number }
+  | { type: "SET_SPEED"; speed: number }
+  | { type: "INCREASE_GENERATION" }
+  | { type: "RESET_GENERATION" }
+  | { type: "START_RUNNING" }
+  | { type: "STOP_RUNNING" }
+  | { type: "SET_GRID"; gridArray: number[] };
+
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
-    case ActionType.INCREASE_GENERATION:
+    case "SET_SIZE":
+      return { ...state, size: action.size };
+    case "SET_SPEED":
+      return { ...state, speed: action.speed };
+    case "INCREASE_GENERATION":
       return { ...state, generation: state.generation + 1 };
-    case ActionType.RESET_GENERATION:
+    case "RESET_GENERATION":
       return { ...state, generation: 0 };
-    case ActionType.START:
+    case "START_RUNNING":
       return { ...state, isRunning: true };
-    case ActionType.STOP:
+    case "STOP_RUNNING":
       return { ...state, isRunning: false };
+    case "SET_GRID":
+      return { ...state, gridArray: action.gridArray };
     default:
       return state;
   }
@@ -27,21 +41,21 @@ const reducer = (state: State, action: Action<ActionType>) => {
 
 export default function GameOfLife() {
   const [state, dispatch] = useReducer(reducer, {
+    size: 10,
+    speed: 5,
     generation: 0,
     isRunning: false,
+    gridArray: Array(10 * 10).fill(0),
   });
 
-  const [size, setSize] = useState(10);
   const [sliderSize, setSliderSize] = useState(10);
-  const [speed, setSpeed] = useState(5);
   const [sliderSpeed, setSliderSpeed] = useState(5);
-  const [grid, setGrid] = useState(Array(10 * 10).fill(0));
 
   const [aliveCells, setAliveCells] = useState(0);
 
   const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderSize(Number(event.target.value));
-    setSize(parseInt(event.target.value));
+    dispatch({ type: "SET_SIZE", size: parseInt(event.target.value) });
     if (aliveCells > 0) {
       handleClear();
     }
@@ -49,28 +63,31 @@ export default function GameOfLife() {
 
   const handleSpeedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSliderSpeed(Number(event.target.value));
-    setSpeed(parseInt(event.target.value));
+    dispatch({ type: "SET_SPEED", speed: parseInt(event.target.value) });
   };
 
   const handleStart = () => {
-    dispatch({ type: ActionType.START });
-    dispatch({ type: ActionType.RESET_GENERATION });
+    dispatch({ type: "START_RUNNING" });
+    dispatch({ type: "RESET_GENERATION" });
   };
 
   const handleRandomize = () => {
-    dispatch({ type: ActionType.STOP });
+    dispatch({ type: "STOP_RUNNING" });
     const randomArray = [];
-    for (let i = 0; i < size * size; i++) {
+    for (let i = 0; i < state.size * state.size; i++) {
       randomArray.push(Math.random() < 0.2 ? 1 : 0);
     }
-    setGrid(randomArray);
+    dispatch({ type: "SET_GRID", gridArray: randomArray });
+
+    gridArrayToCss(randomArray);
   };
 
   const handleClear = () => {
-    dispatch({ type: ActionType.STOP });
-    dispatch({ type: ActionType.RESET_GENERATION });
+    dispatch({ type: "STOP_RUNNING" });
+    dispatch({ type: "RESET_GENERATION" });
+    dispatch({ type: "SET_GRID", gridArray: state.gridArray.fill(0) });
     setAliveCells(0);
-    setGrid(Array(size * size).fill(0));
+    gridArrayToCss(state.gridArray);
   };
 
   const gridArrayToCss = (gridArray: number[]) => {
@@ -87,37 +104,38 @@ export default function GameOfLife() {
     }
   };
 
-  const createInfoBox = (): Array<InfoText> => {
-    return [
-      { name: "Generations :", value: state.generation },
-      { name: "Alive cells:", value: aliveCells },
-    ];
-  };
-
   useEffect(() => {
-    const sumGridArray = grid.reduce((a: number, b: number) => a + b, 0);
+    const sumGridArray = state.gridArray.reduce(
+      (a: number, b: number) => a + b,
+      0
+    );
     setAliveCells(sumGridArray);
-    gridArrayToCss(grid);
-  }, [grid]);
+  }, [state.gridArray]);
 
   return (
     <div className="panels">
       <div className="left-panel" />
       <div className="middle-panel">
         <h1>Conway&apos;s Game of Life</h1>
-        <InfoBox infoTexts={createInfoBox()} />
+        <div className="info">
+          <div className="info-text">
+            <p>Generation:</p>
+            <p>{state.generation}</p>
+          </div>
+          <div className="info-text">
+            <p>Alive Cells:</p>
+            <p>{aliveCells}</p>
+          </div>
+        </div>
         <GameGrid
           state={state}
           dispatch={dispatch}
-          size={size}
-          speed={speed}
-          gridArray={grid}
-          setGridArray={setGrid}
+          gridArrayToCss={gridArrayToCss}
         />
         <div className="sliders">
           <div className="info-text">
             <p>Grid Size:</p>
-            <p>{size}</p>
+            <p>{state.size}</p>
           </div>
           <input
             type="range"
@@ -129,7 +147,7 @@ export default function GameOfLife() {
           />
           <div className="info-text">
             <p>Speed:</p>
-            <p>{speed}</p>
+            <p>{state.speed}</p>
           </div>
           <input
             type="range"
@@ -142,7 +160,7 @@ export default function GameOfLife() {
         </div>
         <div className="buttons">
           <button onClick={handleStart}>Start</button>
-          <button onClick={() => dispatch({ type: ActionType.STOP })}>
+          <button onClick={() => dispatch({ type: "STOP_RUNNING" })}>
             Stop
           </button>
           <button onClick={handleClear}>Clear</button>

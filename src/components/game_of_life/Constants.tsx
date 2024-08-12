@@ -1,0 +1,6 @@
+export enum ActionType {
+  INCREASE_GENERATION,
+  RESET_GENERATION,
+  START,
+  STOP,
+}
