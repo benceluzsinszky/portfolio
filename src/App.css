@@ -32,7 +32,7 @@ body {
   min-height: 100vh;
 }
 
-body>div {
+body > div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,7 +56,6 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
 
 input[type="range"] {
   -webkit-appearance: none;
@@ -119,8 +118,8 @@ button img {
   transition: 0.3s;
 }
 
-button:hover img{
+button:hover img {
   transform: scale(1.1);
   filter: invert(1);
-  opacity: 1; 
+  opacity: 1;
 }
