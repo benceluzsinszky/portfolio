@@ -124,10 +124,7 @@ export default function Simulation({
         if (spriteArray[i] === otherSpriteType) {
           const otherSprite = parseSpriteFromId(i);
 
-          const distance = Math.sqrt(
-            Math.pow(spriteRect.left - otherSprite.rect.left, 2) +
-              Math.pow(spriteRect.top - otherSprite.rect.top, 2)
-          );
+          const distance = getDistance(parseSpriteFromId(i), otherSprite);
           if (distance < minDistance) {
             minDistance = distance;
             closestSprite = otherSprite;
@@ -139,19 +136,71 @@ export default function Simulation({
     [spriteArray, numberOfSprites, parseSpriteFromId]
   );
 
-  const makeRandomMovement = useCallback((sprite: Sprite): void => {
-    const xPosition = sprite.rect.left + Math.floor(Math.random() * 3) - 1;
-    const yPosition = sprite.rect.top + Math.floor(Math.random() * 3) - 1;
+  const getDistance = useCallback(
+    (sprite: Sprite, otherSprite: Sprite): number => {
+      return Math.sqrt(
+        Math.pow(sprite.rect.left - otherSprite.rect.left, 2) +
+          Math.pow(sprite.rect.top - otherSprite.rect.top, 2)
+      );
+    },
+    []
+  );
 
-    sprite.element.style.left = `${xPosition}px`;
-    sprite.element.style.top = `${yPosition}px`;
-  }, []);
+  const getAngle = useCallback(
+    (sprite: Sprite, otherSprite: Sprite): number => {
+      return Math.atan2(
+        otherSprite.rect.top - sprite.rect.top,
+        otherSprite.rect.left - sprite.rect.left
+      );
+    },
+    []
+  );
 
-  const hunt = useCallback((sprite: Sprite, prey: Sprite): void => {}, []);
+  const moveSpriteInAngle = useCallback(
+    (
+      sprite: Sprite,
+      angle: number,
+      direction: number,
+      speed: number
+    ): { xPosition: number; yPosition: number } => {
+      const xPosition =
+        sprite.xPosition + direction * speed * (Math.cos(angle) * 3);
+      const yPosition =
+        sprite.yPosition + direction * speed * (Math.sin(angle) * 3);
+
+      return { xPosition, yPosition };
+    },
+    []
+  );
+
+  const chase = useCallback(
+    (
+      sprite: Sprite,
+      prey: Sprite,
+      direction: number,
+      speed: number
+    ): { xPosition: number; yPosition: number } => {
+      const distance = getDistance(sprite, prey);
+      if (distance === 0) {
+        return { xPosition: sprite.xPosition, yPosition: sprite.yPosition };
+      }
+      const angle = getAngle(sprite, prey);
+      return moveSpriteInAngle(sprite, angle, direction, speed);
+    },
+    [getDistance, getAngle, moveSpriteInAngle]
+  );
 
   const eat = useCallback((sprite: Sprite, prey: Sprite): void => {}, []);
 
-  const run = useCallback((sprite: Sprite, hunter: Sprite): void => {}, []);
+  const makeRandomMovement = useCallback(
+    (sprite: Sprite): { xPosition: number; yPosition: number } => {
+      const xPosition = sprite.xPosition + (Math.random() * 3 - 1) * 0.5;
+      const yPosition = sprite.yPosition + (Math.random() * 3 - 1) * 0.5;
+
+      return { xPosition, yPosition };
+    },
+    []
+  );
 
   const moveSprite = useCallback(
     (sprite: Sprite): void => {
@@ -159,8 +208,16 @@ export default function Simulation({
         sprite.rect,
         parsePrey(spriteArray[sprite.id])
       );
+
       if (closestPrey) {
-        hunt(sprite, closestPrey);
+        const { xPosition: newX, yPosition: newY } = chase(
+          sprite,
+          closestPrey,
+          1,
+          1.2
+        );
+        sprite.xPosition = newX;
+        sprite.yPosition = newY;
         eat(sprite, closestPrey);
       }
 
@@ -169,37 +226,68 @@ export default function Simulation({
         parseHunter(spriteArray[sprite.id])
       );
       if (closestHunter) {
-        run(sprite, closestHunter);
+        const { xPosition: newX, yPosition: newY } = chase(
+          sprite,
+          closestHunter,
+          -1,
+          1
+        );
+        sprite.xPosition = newX;
+        sprite.yPosition = newY;
       }
 
-      makeRandomMovement(sprite);
+      const { xPosition: newX, yPosition: newY } = makeRandomMovement(sprite);
+      sprite.xPosition = newX;
+      sprite.yPosition = newY;
+
+      sprite.element.style.left = `${sprite.xPosition}px`;
+      sprite.element.style.top = `${sprite.yPosition}px`;
     },
     [
       findClosest,
       spriteArray,
       parsePrey,
       parseHunter,
-      hunt,
+      chase,
       eat,
-      run,
       makeRandomMovement,
     ]
   );
 
-  const sameTypeCollision = (
-    sprite: HTMLElement,
-    otherSprite: HTMLElement
-  ): void => {};
+  const sameTypeCollision = (sprite: Sprite, otherSprite: Sprite): void => {};
 
-  const wallCollision = (sprite: HTMLElement): void => {};
+  const checkWalls = useCallback(
+    (sprite: Sprite): void => {
+      if (sprite.id === 0) {
+        console.log(sprite.rect);
+        console.log(walls);
+      }
+      if (sprite.rect.left <= walls.leftWall) {
+        sprite.element.style.left = `${walls.leftWall}px`;
+      }
+      if (sprite.rect.right >= walls.rightWall) {
+        sprite.element.style.left = `${walls.rightWall}px`;
+      }
+      if (sprite.rect.top <= walls.topWall) {
+        sprite.element.style.top = `${walls.topWall}px`;
+      }
+      if (sprite.rect.bottom >= walls.bottomWall) {
+        sprite.element.style.top = `${walls.bottomWall}px`;
+      }
+    },
+    [walls]
+  );
 
   const gameLoop = useCallback(() => {
     if (!isRunning) return;
     for (let i = 0; i < numberOfSprites; i++) {
       const sprite = parseSpriteFromId(i);
       moveSprite(sprite);
+
+      // makeRandomMovement(sprite);
+      checkWalls(sprite);
     }
-  }, [isRunning, numberOfSprites, parseSpriteFromId, moveSprite]);
+  }, [isRunning, numberOfSprites, parseSpriteFromId, moveSprite, checkWalls]);
 
   useEffect(() => {
     if (parentRef.current && size) {
@@ -228,7 +316,7 @@ export default function Simulation({
 
   return (
     <div ref={parentRef} className="simulation">
-      {isRunning && spriteArray && createSprites()}
+      {spriteArray && createSprites()}
     </div>
   );
 }
