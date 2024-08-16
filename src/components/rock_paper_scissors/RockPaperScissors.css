@@ -1,0 +1,6 @@
+.simulation {
+  min-width: calc(100vh / 2);
+  max-width: calc(100vh / 2);
+  min-height: calc(100vh / 2);
+  max-height: calc(100vh / 2);
+}
