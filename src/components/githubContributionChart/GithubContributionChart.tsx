@@ -29,7 +29,7 @@ export default function GithubContributionChart() {
   }, []);
 
   return (
-    <ScrollArea w={300} offsetScrollbars type="always">
+    <ScrollArea w={"auto"} offsetScrollbars scrollbars="x">
       <div className="flex flex-row items-start">
         {githubData &&
           githubData
