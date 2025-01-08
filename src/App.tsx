@@ -6,7 +6,7 @@ import HomePage from "./pages/homePage/HomePage";
 
 function App() {
   return (
-    <MantineProvider>
+    <MantineProvider defaultColorScheme="dark">
       <Router>
         <div className="flex flex-col min-h-screen items-center">
           <Header />
