@@ -5,9 +5,17 @@ export default function HomePage() {
   return (
     <div>
       <Availability />
-      <h1>Hi, I'm Bence</h1>
-      <h2>And this is my portfolio</h2>
-      <p>I am a software engineer with</p>
+      <div className="w-1/2 my-10">
+        <h1>Hi, I'm Bence</h1>
+        <h2>And this is my portfolio</h2>
+        <p className="mt-5">
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+        </p>
+      </div>
+      <p>Github, LinkedIn, CV</p>
       <GithubContributionChart />
     </div>
   );
