@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type ContactButtonProps = {
   href: string;
   icon: string;
@@ -6,11 +8,12 @@ type ContactButtonProps = {
 
 export default function ContactButton({ href, icon, alt }: ContactButtonProps) {
   return (
-    <a
-      href={href}
-      className="border-2 rounded-md border-gray-800 dark:border-gray-200 hover:opacity-75"
+    <Link
+      to={href}
+      className="transform transition-transform brightness-90 duration-100 hover:brightness-110 hover:scale-105 active:translate-y-1"
+      title={alt}
     >
       <img src={icon} alt={alt} className="w-10 h-10" />
-    </a>
+    </Link>
   );
 }
