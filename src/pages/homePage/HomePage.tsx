@@ -1,11 +1,11 @@
 import Availability from "../../components/Availability";
+import ContactButtons from "../../components/contactButtons/ContactButtons";
 import GithubContributionChart from "../../components/githubContributionChart/GithubContributionChart";
 
 export default function HomePage() {
   return (
-    <div>
-      <Availability />
-      <div className="w-1/2 my-10">
+    <div className="flex flex-col space-y-10">
+      <section className="w-1/2">
         <h1>Hi, I'm Bence</h1>
         <h2>And this is my portfolio</h2>
         <p className="mt-5">
@@ -14,9 +14,16 @@ export default function HomePage() {
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
-      </div>
-      <p>Github, LinkedIn, CV</p>
-      <GithubContributionChart />
+      </section>
+      <section>
+        <Availability />
+      </section>
+      <section>
+        <ContactButtons />
+      </section>
+      <section>
+        <GithubContributionChart />
+      </section>
     </div>
   );
 }
