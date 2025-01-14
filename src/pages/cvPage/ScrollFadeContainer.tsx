@@ -18,7 +18,7 @@ export default function ScrollFadeContainer({
         });
       },
       {
-        threshold: [0.4, 0.4], // Adjust the threshold as needed
+        threshold: 0.2,
       }
     );
 
