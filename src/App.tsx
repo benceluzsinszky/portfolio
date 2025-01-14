@@ -4,6 +4,7 @@ import HtmlCloseIcon from "./assets/icons/html_close.svg";
 import HtmlOpenIcon from "./assets/icons/html_open.svg";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import CurriculumVitae from "./pages/cvPage/CurriculumVitae";
 import HomePage from "./pages/homePage/HomePage";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <div className="mx-14">
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/cv" element={<CurriculumVitae />} />
               </Routes>
             </div>
             <div className="h-20 mt-5"></div>
