@@ -24,7 +24,7 @@ export default function TechStack() {
         <TechStackItem icon={NodeIcon} alt="Node.js" />
         <TechStackItem icon={PythonIcon} alt="Python" />
         <TechStackItem icon={FastAPIIcon} alt="FastAPI" />
-        <TechStackItem icon={FlaskIcon} alt="Flask" isDark />
+        <TechStackItem icon={FlaskIcon} alt="Flask" />
       </div>
 
       <div className="flex flex-row items-center space-x-2">
@@ -33,8 +33,8 @@ export default function TechStack() {
         <TechStackItem icon={JavaIcon} alt="Java" />
         <TechStackItem icon={PostgresIcon} alt="PostgresSQL" />
         <TechStackItem icon={DockerIcon} alt="Docker" />
-        <TechStackItem icon={AWSIcon} alt="AWS" isDark />
-        <TechStackItem icon={LinuxIcon} alt="Linux" isDark />
+        <TechStackItem icon={AWSIcon} alt="AWS" />
+        <TechStackItem icon={LinuxIcon} alt="Linux" />
       </div>
     </div>
   );
