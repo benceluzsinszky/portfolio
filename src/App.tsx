@@ -11,7 +11,7 @@ function App() {
   return (
     <MantineProvider defaultColorScheme="dark">
       <Router>
-        <div className="flex flex-col min-h-screen items-center">
+        <div className="flex flex-col min-h-screen items-center !scroll-smooth">
           <Header />
           <main className="flex-grow mb-auto w-8/12 relative">
             <Link to="/">
