@@ -16,8 +16,8 @@ import TechStackItem from "./TechStackItem";
 
 export default function TechStack() {
   return (
-    <div className="flex flex-col flex-wrap justify-center space-y-2">
-      <div className="flex flex-row space-x-2">
+    <div className="flex flex-col flex-wrap justify-between h-full w-full mb-3">
+      <div className="flex flex-row justify-between">
         <TechStackItem icon={TypeScriptIcon} alt="TypeScript" />
         <TechStackItem icon={ReactIcon} alt="React" />
         <TechStackItem icon={TailwindIcon} alt="Tailwind CSS" />
@@ -27,7 +27,7 @@ export default function TechStack() {
         <TechStackItem icon={FlaskIcon} alt="Flask" />
       </div>
 
-      <div className="flex flex-row items-center space-x-2">
+      <div className="flex flex-row justify-between">
         <TechStackItem icon={DotNetIcon} alt="ASP.NET" />
         <TechStackItem icon={GolangIcon} alt="Go" />
         <TechStackItem icon={JavaIcon} alt="Java" />
