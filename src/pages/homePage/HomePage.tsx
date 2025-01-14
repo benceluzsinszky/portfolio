@@ -15,10 +15,14 @@ export default function HomePage() {
       <section className="w-1/2">
         <h1>Hi, I'm Bence</h1>
         <h2>And this is my portfolio</h2>
-        <p className="mt-5">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s.
+        <p className="mt-5 text-justify">
+          I am an authentic and quick-witted Full Stack Developer with a
+          background as an Electrical Engineer. I write my code in a clean,
+          testable and maintainable way, with a keen attention to detail, and a
+          dedication to quality. I am experienced in problem solving within high
+          pressure environments and have the ability to swiftly make
+          well-informed, rational decisions. I am persistent yet reasonable, and
+          I work well both in a team and by myself.
         </p>
       </section>
 
