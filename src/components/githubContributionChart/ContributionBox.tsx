@@ -20,7 +20,7 @@ export default function ContributionBox({
       case 4:
         return "bg-emerald-200";
       default:
-        return "bg-gray-800";
+        return "bg-gray-900";
     }
   };
 
