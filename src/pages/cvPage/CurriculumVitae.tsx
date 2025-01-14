@@ -1,12 +1,17 @@
 import { Divider } from "@mantine/core";
+import ScrollFadeContainer from "./ScrollFadeContainer";
 
 export default function CurriculumVitae() {
   return (
-    <div>
+    <div className="[&_p]:ml-5 [&_li]:ml-8">
       <h1>Curriculum Vitae</h1>
       <Divider />
       <h2>Work Experience</h2>
-      <div>
+      <h3>Scroll down &darr;</h3>
+
+      <div className="h-screen" />
+
+      <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">Full Stack Developer Student Assistant</h3>
         <p>IT University of Copenhagen, Copenhagen, Denmark</p>
         <p>Oct 2024 -</p>
@@ -29,9 +34,11 @@ export default function CurriculumVitae() {
             Configuring NGINX reverse proxy and SSL certificates for environment
           </li>
         </ul>
-      </div>
+      </ScrollFadeContainer>
 
-      <div>
+      <div className="h-screen" />
+
+      <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">
           Backend Developer & Quality Assurance Student Assistant
         </h3>
@@ -74,9 +81,11 @@ export default function CurriculumVitae() {
           </li>
           <li>Monitoring and logging other services with CloudWatch</li>
         </ul>
-      </div>
+      </ScrollFadeContainer>
 
-      <div>
+      <div className="h-screen" />
+
+      <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">Test Process Specialist</h3>
         <p>Bosch, Miskolc, Hungary</p>
         <p>Dec 2020 - Aug 2023</p>
@@ -123,9 +132,11 @@ export default function CurriculumVitae() {
             Supporting technicians crew in ad-hoc service of faulty equipment
           </li>
         </ul>
-      </div>
+      </ScrollFadeContainer>
 
-      <div>
+      <div className="h-screen" />
+
+      <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">Electronic Development Engineer</h3>
         <p>Ten Pao Electronics, Miskolc, Hungary</p>
         <p>Sep 2019 - Dec 2020</p>
@@ -145,9 +156,11 @@ export default function CurriculumVitae() {
           <li>Installing and duplicating of production lines</li>
           <li>Ensuring seamless operation of test equipment</li>
         </ul>
-      </div>
+      </ScrollFadeContainer>
 
-      <div>
+      <div className="h-screen" />
+
+      <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">Internship in Manufacturing</h3>
         <p>Bosch, Miskolc, Hungary</p>
         <p>Apr 2017 - Sep 2019</p>
@@ -158,7 +171,7 @@ export default function CurriculumVitae() {
           <li>Implementing production development projects</li>
           <li>Creating and revising documents for manufacturing</li>
         </ul>
-      </div>
+      </ScrollFadeContainer>
     </div>
   );
 }
