@@ -3,6 +3,7 @@ import TechStackIcon from "../../assets/icons/stack.svg";
 import Availability from "../../components/Availability";
 import ContactButtons from "../../components/contactButtons/ContactButtons";
 import GithubContributionChart from "../../components/githubContributionChart/GithubContributionChart";
+import Journey from "../../components/journey/Journey";
 import ShowCase from "../../components/ShowCase";
 import TechStack from "../../components/techStack/TechStack";
 
@@ -30,16 +31,16 @@ export default function HomePage() {
         <ContactButtons />
       </section>
       <section className="flex flex-row justify-between space-x-10">
-        <ShowCase
-          icon={GithubIcon}
-          title="Github Contribution"
-          element={<GithubContributionChart />}
-        />
-        <ShowCase
-          icon={TechStackIcon}
-          title="Tech Stack"
-          element={<TechStack />}
-        />
+        <ShowCase icon={GithubIcon} title="Github Contribution">
+          <GithubContributionChart />
+        </ShowCase>
+        <ShowCase icon={TechStackIcon} title="Tech Stack">
+          <TechStack />
+        </ShowCase>
+      </section>
+      <section className="flex flex-col items-center space-y-10 ">
+        <h2 className="text-center">My Journey</h2>
+        <Journey />
       </section>
     </div>
   );
