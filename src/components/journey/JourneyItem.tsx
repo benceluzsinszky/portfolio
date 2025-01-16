@@ -1,41 +1,41 @@
 import ShowCase from "../ShowCase";
 
 type JourneyItemProps = {
-  logo: string;
-  year: string;
+  date: string;
+  icon: string;
   title: string;
   description: string;
   swapped?: boolean;
 };
 
 export default function JourneyItem({
-  logo,
-  year,
+  date,
+  icon,
   title,
   description,
   swapped,
 }: JourneyItemProps) {
+  const viewShowCase = () => {
+    return (
+      <ShowCase title={title} icon={icon}>
+        <p>{description}</p>
+      </ShowCase>
+    );
+  };
+
+  const viewDate = () => {
+    return (
+      <h3 className={`text-${swapped ? "right" : "left"} text-gray-400`}>
+        {date}
+      </h3>
+    );
+  };
+
   return (
-    <div className="my-10 flex items-center">
-      <div className="flex-1">
-        {swapped ? (
-          <ShowCase title={title}>
-            <p>{description}</p>
-          </ShowCase>
-        ) : (
-          <h3 className="text-right text-gray-400">{year}</h3>
-        )}
-      </div>
-      <div className="w-5 h-5 bg-gray-200 rounded-full mx-5"></div>
-      <div className="flex-1">
-        {!swapped ? (
-          <ShowCase title={title}>
-            <p>{description}</p>
-          </ShowCase>
-        ) : (
-          <h3 className="text-left text-gray-400">{year}</h3>
-        )}
-      </div>
+    <div className="my-10 flex items-center w-full z-10">
+      <div className="flex-1">{swapped ? viewDate() : viewShowCase()}</div>
+      <div className="w-5 h-5 bg-gray-950 border-4 border-gray-200 rounded-full mx-5"></div>
+      <div className="flex-1">{!swapped ? viewDate() : viewShowCase()}</div>
     </div>
   );
 }
