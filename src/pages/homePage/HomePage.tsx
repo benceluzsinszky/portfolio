@@ -13,7 +13,7 @@ export default function HomePage() {
       <section>
         <Availability />
       </section>
-      <section className="w-1/2">
+      <section className="md:w-1/2">
         <h1>Hi, I'm Bence</h1>
         <h2>And this is my portfolio</h2>
         <p className="mt-5 text-justify">
@@ -26,7 +26,7 @@ export default function HomePage() {
       <section>
         <ContactButtons />
       </section>
-      <section className="flex flex-row justify-between space-x-10">
+      <section className="flex flex-col md:flex-row justify-between space-y-10 md:space-y-0 md:space-x-10">
         <ShowCase icon={GithubIcon} title="Github Contribution">
           <GithubContributionChart />
         </ShowCase>
@@ -34,7 +34,7 @@ export default function HomePage() {
           <TechStack />
         </ShowCase>
       </section>
-      <section className="flex flex-col items-center space-y-10 ">
+      <section className="flex flex-col items-start md:items-center space-y-5 md:space-y-10 ">
         <h2 className="text-center">My Journey</h2>
         <Journey />
       </section>

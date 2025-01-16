@@ -26,7 +26,7 @@ export default function ContributionBox({
 
   return (
     <div
-      className={`h-4 w-4 m-0.5 rounded-sm ${getColor(
+      className={`h-3 md:h-4 w-3 md:w-4 m-0.5 rounded-sm ${getColor(
         level
       )} hover:brightness-125`}
       title={`${count} contributions on ${date}`}

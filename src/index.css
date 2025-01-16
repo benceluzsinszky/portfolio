@@ -10,20 +10,17 @@
     @apply font-poppins bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50;
   }
   h1 {
-    @apply text-5xl font-bold my-1;
+    @apply text-2xl md:text-5xl font-bold my-1;
   }
   h2 {
-    @apply text-4xl font-bold my-1;
+    @apply text-xl md:text-4xl font-bold my-1;
   }
   h3 {
-    @apply text-2xl font-bold my-1;
-  }
-  h4 {
-    @apply text-xl font-bold my-1;
+    @apply text-lg md:text-2xl font-bold my-1;
   }
 
-  h5 {
-    @apply text-base font-bold my-1;
+  p {
+    @apply text-sm md:text-base my-1;
   }
 
   li {

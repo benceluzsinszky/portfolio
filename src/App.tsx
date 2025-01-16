@@ -13,15 +13,15 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen items-center !scroll-smooth">
           <Header />
-          <main className="flex-grow mb-auto w-8/12 relative">
+          <main className="flex-grow mb-auto max-w-full md:w-8/12 relative">
             <Link to="/">
               <img
                 src={HtmlOpenIcon}
                 alt="HTML open tag"
-                className="w-20 h-20 mb-5"
+                className="w-20 h-20 mb-5 ml-3 md:ml-0"
               />
             </Link>
-            <div className="mx-14">
+            <div className="mx-4 sm:mx-8 md:mx-14">
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/cv.pdf" element={<CurriculumVitae />} />
@@ -31,7 +31,7 @@ function App() {
             <img
               src={HtmlCloseIcon}
               alt="HTML close tag"
-              className="w-20 h-20 mt-5 absolute bottom-0"
+              className="w-20 h-20 mt-5 absolute bottom-0  ml-3 md:ml-0"
             />
           </main>
           <Footer />

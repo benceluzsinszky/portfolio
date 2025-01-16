@@ -17,11 +17,15 @@ export default function JourneyItem({
   swapped,
   techStack,
 }: JourneyItemProps) {
+  if (window.innerWidth < 768) {
+    swapped = true;
+  }
+
   const viewShowCase = () => {
     return (
       <ShowCase title={title} icon={icon}>
         <p>{description}</p>
-        {techStack && (
+        {window.innerWidth > 768 && techStack && (
           <div>
             <p className="mt-3 text-sm text-gray-300">{techStack}</p>
           </div>
@@ -32,17 +36,25 @@ export default function JourneyItem({
 
   const viewDate = () => {
     return (
-      <h3 className={`text-${swapped ? "right" : "left"} text-gray-400`}>
+      <h3
+        className={`ml-3 md:ml-0 text-${
+          swapped ? "right" : "left"
+        } text-gray-400`}
+      >
         {date}
       </h3>
     );
   };
 
   return (
-    <div className="my-10 flex items-center w-full z-10">
-      <div className="flex-1">{swapped ? viewDate() : viewShowCase()}</div>
-      <div className="w-5 h-5 bg-gray-950 border-4 border-gray-200 rounded-full mx-5"></div>
-      <div className="flex-1">{!swapped ? viewDate() : viewShowCase()}</div>
+    <div className="my-10 flex flex-col md:flex-row items-start md:items-center w-full z-10">
+      <div className="flex-1 pl-6 md:pl-0">
+        {swapped ? viewDate() : viewShowCase()}
+      </div>
+      <div className="hidden md:block w-5 h-5 bg-gray-950 border-4 border-gray-200 rounded-full mx-5"></div>
+      <div className="pl-6 md:pl-0 w-full md:flex-1">
+        {!swapped ? viewDate() : viewShowCase()}
+      </div>
     </div>
   );
 }
