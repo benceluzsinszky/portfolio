@@ -10,17 +10,20 @@ export default function ScrollFadeContainer({
   const [isVisible, setVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const handleObserver = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      setVisible(entry.isIntersecting);
+    });
+  };
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setVisible(entry.isIntersecting);
-        });
-      },
-      {
-        threshold: 0.2,
-      }
-    );
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.9,
+    };
+
+    const observer = new IntersectionObserver(handleObserver, observerOptions);
 
     const currentRef = containerRef.current;
 
