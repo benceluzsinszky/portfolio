@@ -17,12 +17,14 @@ export default function Journey() {
           icon={ITULogo}
           title="IT University of Copenhagen"
           description="Full Stack Developer Student Assistant"
+          techStack="React JS, Express JS, SQLite, Docker, Nginx, Git"
         />
         <JourneyItem
           date="Nov 2023"
           icon={OktogridLogo}
           title="Oktogrid"
           description="Full Stack Developer & Quality Assurance Student Assistant"
+          techStack="React TS, FastAPI, PostgreSQL, AWS, Docker, Git"
           swapped
         />
         <JourneyItem
@@ -36,6 +38,7 @@ export default function Journey() {
           icon={BoschLogo}
           title="Bosch"
           description="Test Process Specialist"
+          techStack="Python, Microsoft SQL Server"
           swapped
         />
         <JourneyItem

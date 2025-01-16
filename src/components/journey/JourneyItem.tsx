@@ -1,3 +1,4 @@
+import { HoverCard } from "@mantine/core";
 import ShowCase from "../ShowCase";
 
 type JourneyItemProps = {
@@ -6,6 +7,7 @@ type JourneyItemProps = {
   title: string;
   description: string;
   swapped?: boolean;
+  techStack?: string;
 };
 
 export default function JourneyItem({
@@ -14,11 +16,17 @@ export default function JourneyItem({
   title,
   description,
   swapped,
+  techStack,
 }: JourneyItemProps) {
   const viewShowCase = () => {
     return (
       <ShowCase title={title} icon={icon}>
         <p>{description}</p>
+        {techStack && (
+          <div>
+            <p className="mt-3 text-sm text-gray-300">{techStack}</p>
+          </div>
+        )}
       </ShowCase>
     );
   };
