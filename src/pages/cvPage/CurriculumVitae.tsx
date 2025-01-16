@@ -1,16 +1,16 @@
 import { Divider } from "@mantine/core";
 import ScrollFadeContainer from "./ScrollFadeContainer";
+import TimeLine from "./TimeLine";
 
 export default function CurriculumVitae() {
   return (
     <div className="[&_p]:ml-5 [&_li]:ml-8">
+      <TimeLine />
       <h1>Curriculum Vitae</h1>
       <Divider />
       <h2>Work Experience</h2>
       <h3>Scroll down &darr;</h3>
-
       <div className="h-screen" />
-
       <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">Full Stack Developer Student Assistant</h3>
         <p>IT University of Copenhagen, Copenhagen, Denmark</p>
@@ -35,9 +35,7 @@ export default function CurriculumVitae() {
           </li>
         </ul>
       </ScrollFadeContainer>
-
       <div className="h-screen" />
-
       <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">
           Backend Developer & Quality Assurance Student Assistant
@@ -82,9 +80,7 @@ export default function CurriculumVitae() {
           <li>Monitoring and logging other services with CloudWatch</li>
         </ul>
       </ScrollFadeContainer>
-
       <div className="h-screen" />
-
       <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">Test Process Specialist</h3>
         <p>Bosch, Miskolc, Hungary</p>
@@ -133,9 +129,7 @@ export default function CurriculumVitae() {
           </li>
         </ul>
       </ScrollFadeContainer>
-
       <div className="h-screen" />
-
       <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">Electronic Development Engineer</h3>
         <p>Ten Pao Electronics, Miskolc, Hungary</p>
@@ -157,9 +151,7 @@ export default function CurriculumVitae() {
           <li>Ensuring seamless operation of test equipment</li>
         </ul>
       </ScrollFadeContainer>
-
       <div className="h-screen" />
-
       <ScrollFadeContainer>
         <h3 className="mt-4 mb-3">Internship in Manufacturing</h3>
         <p>Bosch, Miskolc, Hungary</p>
