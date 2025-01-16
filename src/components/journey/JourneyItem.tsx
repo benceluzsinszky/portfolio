@@ -1,4 +1,3 @@
-import { HoverCard } from "@mantine/core";
 import ShowCase from "../ShowCase";
 
 type JourneyItemProps = {
