@@ -6,14 +6,12 @@ export default function Journey() {
       <div className="h-10 w-1 bg-gradient-to-t from-gray-200 to-gray-950"></div>
       <div className="relative flex flex-col items-center ">
         <JourneyItem
-          color="gray-200"
           logo="https://via.placeholder.com/150"
           year="2024"
           description="Full Stack Developer Student Assistant"
           title="IT University of Copenhagen"
         />
         <JourneyItem
-          color="gray-200"
           logo="https://via.placeholder.com/150"
           year="2023"
           description="Full Stack Developer & Quality Assurance Student Assistant"

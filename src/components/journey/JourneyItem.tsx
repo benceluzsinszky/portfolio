@@ -1,7 +1,6 @@
 import ShowCase from "../ShowCase";
 
 type JourneyItemProps = {
-  color: string;
   logo: string;
   year: string;
   title: string;
@@ -10,7 +9,6 @@ type JourneyItemProps = {
 };
 
 export default function JourneyItem({
-  color,
   logo,
   year,
   title,
