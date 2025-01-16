@@ -17,7 +17,7 @@ export default function ContactButtons() {
         icon={LinkedInIcon}
         alt="LinkedIn"
       />
-      <ContactButton href="/cv" icon={CVIcon} alt="Resume" />
+      <ContactButton href="/cv.pdf" icon={CVIcon} alt="Resume" />
       <ContactButton
         href="mailto:benceluzsinszky@gmail.com"
         icon={MailIcon}
