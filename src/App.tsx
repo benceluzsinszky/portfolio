@@ -24,7 +24,7 @@ function App() {
             <div className="mx-14">
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/cv" element={<CurriculumVitae />} />
+                <Route path="/cv.pdf" element={<CurriculumVitae />} />
               </Routes>
             </div>
             <div className="h-20 mt-5"></div>
