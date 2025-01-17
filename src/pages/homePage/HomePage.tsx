@@ -11,9 +11,7 @@ import TechStack from "../../components/techStack/TechStack";
 export default function HomePage() {
   return (
     <div className="flex flex-col space-y-10">
-      <section>
-        <ScrollLoadingBar />
-      </section>
+      <ScrollLoadingBar />
       <section>
         <Availability />
       </section>
