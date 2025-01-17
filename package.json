@@ -16,6 +16,7 @@
     "portfolio": "file:",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-helmet": "^6.1.0",
     "react-pdf": "^9.2.1",
     "react-router-dom": "^7.1.2"
   },
@@ -23,6 +24,7 @@
     "@eslint/js": "^9.18.0",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
+    "@types/react-helmet": "^6.1.11",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.18.0",
