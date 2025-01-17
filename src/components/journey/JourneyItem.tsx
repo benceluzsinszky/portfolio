@@ -37,9 +37,8 @@ export default function JourneyItem({
   const viewDate = () => {
     return (
       <h3
-        className={`ml-3 md:ml-0 text-${
-          swapped ? "right" : "left"
-        } text-gray-400`}
+        className="ml-3 md:ml-0 text-gray-400"
+        style={{ textAlign: swapped ? "right" : "left" }}
       >
         {date}
       </h3>
