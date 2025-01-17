@@ -4,12 +4,16 @@ import Availability from "../../components/Availability";
 import ContactButtons from "../../components/contactButtons/ContactButtons";
 import GithubContributionChart from "../../components/githubContributionChart/GithubContributionChart";
 import Journey from "../../components/journey/Journey";
+import ScrollLoadingBar from "../../components/ScrollLoadingBar";
 import ShowCase from "../../components/ShowCase";
 import TechStack from "../../components/techStack/TechStack";
 
 export default function HomePage() {
   return (
     <div className="flex flex-col space-y-10">
+      <section>
+        <ScrollLoadingBar />
+      </section>
       <section>
         <Availability />
       </section>
