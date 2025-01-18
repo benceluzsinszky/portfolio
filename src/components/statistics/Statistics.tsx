@@ -45,12 +45,14 @@ export default function Statistics() {
   }, []);
 
   return (
-    <div className="flex justify-between">
+    <div className="flex flex-col justify-evenly h-full">
       <div>
         <h3>
           <CountUp end={calculateWorkHours()} duration={2} />
         </h3>
         <p>hours worked in software development</p>
+      </div>
+      <div>
         <h3 className="mt-5">
           <CountUp end={gitHubContributions} duration={2} />
         </h3>
