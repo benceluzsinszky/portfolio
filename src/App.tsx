@@ -1,4 +1,5 @@
 import { MantineProvider } from "@mantine/core";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import HtmlCloseIcon from "./assets/icons/html_close.svg";
 import HtmlOpenIcon from "./assets/icons/html_open.svg";
@@ -10,33 +11,43 @@ import HomePage from "./pages/homePage/HomePage";
 function App() {
   return (
     <MantineProvider defaultColorScheme="dark">
-      <Router>
-        <div className="flex flex-col min-h-screen items-center !scroll-smooth">
-          <Header />
-          <main className="flex-grow mb-auto max-w-full md:w-8/12 relative">
-            <Link to="/">
+      <HelmetProvider>
+        <Helmet>
+          <title>Bence Luzsinszky</title>
+          <meta
+            name="description"
+            content="Bence Luzsinszky's portfolio website"
+          />
+          <link rel="icon" href="/code.svg" />
+        </Helmet>
+        <Router>
+          <div className="flex flex-col min-h-screen items-center !scroll-smooth">
+            <Header />
+            <main className="flex-grow mb-auto max-w-full md:w-8/12 relative">
+              <Link to="/">
+                <img
+                  src={HtmlOpenIcon}
+                  alt="HTML open tag"
+                  className="w-20 h-20 mb-5 ml-3 md:ml-0"
+                />
+              </Link>
+              <div className="mx-4 sm:mx-8 md:mx-14">
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/cv.pdf" element={<CurriculumVitae />} />
+                </Routes>
+              </div>
+              <div className="h-20 mt-5"></div>
               <img
-                src={HtmlOpenIcon}
-                alt="HTML open tag"
-                className="w-20 h-20 mb-5 ml-3 md:ml-0"
+                src={HtmlCloseIcon}
+                alt="HTML close tag"
+                className="w-20 h-20 mt-5 absolute bottom-0  ml-3 md:ml-0"
               />
-            </Link>
-            <div className="mx-4 sm:mx-8 md:mx-14">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/cv.pdf" element={<CurriculumVitae />} />
-              </Routes>
-            </div>
-            <div className="h-20 mt-5"></div>
-            <img
-              src={HtmlCloseIcon}
-              alt="HTML close tag"
-              className="w-20 h-20 mt-5 absolute bottom-0  ml-3 md:ml-0"
-            />
-          </main>
-          <Footer />
-        </div>
-      </Router>
+            </main>
+            <Footer />
+          </div>
+        </Router>
+      </HelmetProvider>
     </MantineProvider>
   );
 }
