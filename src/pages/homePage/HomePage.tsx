@@ -23,10 +23,10 @@ export default function HomePage() {
       <section className="md:w-1/2">
         <h1>Hi, I'm Bence</h1>
         <h2>And this is my portfolio</h2>
-        <p className="mt-5 text-justify">
+        <p className="mt-5">
           I am a Full Stack develpoper with a background in Electrical
-          Engineering. I am finishing my Masters in Software Design at the IT
-          University of Copenhagen and.
+          Engineering. I will graduate MSc in Software Design from the IT
+          University of Copenhagen in the Summer of 2025.
         </p>
       </section>
 
