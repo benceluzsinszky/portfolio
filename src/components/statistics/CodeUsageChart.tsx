@@ -37,14 +37,30 @@ export default function CodeUsageChart() {
       0
     );
 
-    return Object.entries(codeUsage)
-      .sort(([, a], [, b]) => b - a)
-      .map(([language, usage]) => ({
-        name: language,
-        value: usage,
-        color: languageColors[language] || "gray.6",
-      }))
-      .filter((data) => data.value / totalUsage > 0.03);
+    const usageData = Object.entries(codeUsage).map(([language, usage]) => ({
+      name: language,
+      value: usage / totalUsage,
+      color: languageColors[language] || "gray.6",
+    }));
+
+    const others = usageData
+      .filter((data) => data.value <= 0.03)
+      .reduce(
+        (acc, curr) => ({
+          name: "Other",
+          value: acc.value + curr.value,
+          color: "gray.6",
+        }),
+        { name: "Other", value: 0, color: "gray.6" }
+      );
+
+    const filteredData = usageData.filter((data) => data.value > 0.03);
+
+    if (others.value > 0) {
+      filteredData.push(others);
+    }
+
+    return filteredData.sort((a, b) => b.value - a.value);
   };
 
   useEffect(() => {
@@ -106,7 +122,7 @@ export default function CodeUsageChart() {
       labelsType="percent"
       withTooltip
       tooltipDataSource="segment"
-      tooltipProps={{ payload: [{ name: "helllooo" }] }}
+      valueFormatter={(value: number) => `${(value * 100).toFixed(0)}%`}
       mx="auto"
       my="auto"
     />
