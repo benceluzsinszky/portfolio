@@ -1,6 +1,6 @@
 import { ScrollArea } from "@mantine/core";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ContributionBox from "./ContributionBox";
 
 type Contribution = {
@@ -10,6 +10,8 @@ type Contribution = {
 };
 
 export default function GithubContributionChart() {
+  const viewport = useRef<HTMLDivElement>(null);
+
   const [githubData, setGitHubData] = useState<Contribution[]>([]);
 
   useEffect(() => {
@@ -28,8 +30,21 @@ export default function GithubContributionChart() {
     fetchGitHubData();
   }, []);
 
+  useEffect(() => {
+    const scrollToEnd = () => {
+      viewport.current!.scrollTo({
+        left: viewport.current!.scrollWidth,
+        behavior: "smooth",
+      });
+    };
+
+    if (githubData.length > 0) {
+      scrollToEnd();
+    }
+  }, [githubData]);
+
   return (
-    <ScrollArea offsetScrollbars scrollbars="x">
+    <ScrollArea offsetScrollbars scrollbars="x" viewportRef={viewport}>
       <div className="flex flex-row items-start">
         {githubData &&
           githubData
