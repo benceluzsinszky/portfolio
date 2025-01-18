@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet";
 import GithubIcon from "../../assets/icons/github.svg";
 import TechStackIcon from "../../assets/icons/stack.svg";
 import Availability from "../../components/Availability";
@@ -12,14 +11,6 @@ import TechStack from "../../components/techStack/TechStack";
 export default function HomePage() {
   return (
     <div className="flex flex-col space-y-10">
-      <Helmet>
-        <title>Bence Luzsinszky</title>
-        <meta
-          name="description"
-          content="Bence Luzsinszky's portfolio website"
-        />
-        <link rel="icon" href="/code.svg" />
-      </Helmet>
       <ScrollLoadingBar />
       <section>
         <Availability />
