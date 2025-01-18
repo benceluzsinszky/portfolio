@@ -1,4 +1,6 @@
-import GithubIcon from "../../assets/icons/github.svg";
+import BarChartIcon from "../../assets/icons/chart-bar.svg";
+import PieChartIcon from "../../assets/icons/chart-pie.svg";
+import GithubIcon from "../../assets/icons/github-thick.svg";
 import TechStackIcon from "../../assets/icons/stack.svg";
 import Availability from "../../components/Availability";
 import ContactButtons from "../../components/contactButtons/ContactButtons";
@@ -6,6 +8,9 @@ import GithubContributionChart from "../../components/githubContributionChart/Gi
 import Journey from "../../components/journey/Journey";
 import ScrollLoadingBar from "../../components/ScrollLoadingBar";
 import ShowCase from "../../components/ShowCase";
+import CodeUsageChart from "../../components/statistics/CodeUsageChart";
+import Statistics from "../../components/statistics/Statistics";
+
 import TechStack from "../../components/techStack/TechStack";
 
 export default function HomePage() {
@@ -19,22 +24,32 @@ export default function HomePage() {
         <h1>Hi, I'm Bence</h1>
         <h2>And this is my portfolio</h2>
         <p className="mt-5 text-justify">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s.
+          I am a Full Stack develpoper with a background in Electrical
+          Engineering. I am finishing my Masters in Software Design at the IT
+          University of Copenhagen and.
         </p>
       </section>
 
       <section>
         <ContactButtons />
       </section>
-      <section className="flex flex-col md:flex-row justify-between space-y-10 md:space-y-0 md:space-x-10">
-        <ShowCase icon={GithubIcon} title="Github Contribution">
-          <GithubContributionChart />
-        </ShowCase>
-        <ShowCase icon={TechStackIcon} title="Tech Stack">
-          <TechStack />
-        </ShowCase>
+      <section className="space-y-10">
+        <div className="flex flex-col md:flex-row justify-between space-y-10 md:space-y-0 md:space-x-10">
+          <ShowCase icon={BarChartIcon} title="Statistics">
+            <Statistics />
+          </ShowCase>
+          <ShowCase icon={PieChartIcon} title="Language Usage">
+            <CodeUsageChart />
+          </ShowCase>
+        </div>
+        <div className="flex flex-col md:flex-row justify-between space-y-10 md:space-y-0 md:space-x-10">
+          <ShowCase icon={GithubIcon} title="Github Contribution">
+            <GithubContributionChart />
+          </ShowCase>
+          <ShowCase icon={TechStackIcon} title="Tech Stack">
+            <TechStack />
+          </ShowCase>
+        </div>
       </section>
       <section className="flex flex-col items-start md:items-center space-y-5 md:space-y-10 ">
         <h2 className="text-center">My Journey</h2>

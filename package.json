@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/charts": "^7.16.0",
     "@mantine/core": "^7.15.3",
     "@mantine/hooks": "^7.15.3",
     "axios": "^1.7.9",
     "portfolio": "file:",
     "react": "^18.3.1",
+    "react-countup": "^6.5.3",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-pdf": "^9.2.1",
