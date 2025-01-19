@@ -26,9 +26,7 @@ export default function Statistics() {
   useEffect(() => {
     const fetchGitHubData = async () => {
       await axios
-        .get(
-          "https://github-contributions-api.jogruber.de/v4/benceluzsinszky?y=last"
-        )
+        .get("https://github-contributions-api.jogruber.de/v4/benceluzsinszky?")
         .then((response) => {
           const contributions: { [key: string]: number } = response.data.total;
           const sum = Object.values(contributions).reduce(
