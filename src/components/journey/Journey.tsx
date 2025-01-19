@@ -16,7 +16,7 @@ export default function Journey() {
           date="Sep 2024"
           icon={ITULogo}
           title="IT University of Copenhagen"
-          description="Full Stack Developer Student Assistant"
+          description="Full Stack Student Developer"
           techStack="React JS, Express JS, SQLite, Docker, Nginx, Git"
         />
         <JourneyItem
