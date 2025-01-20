@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import BarChartIcon from "../../assets/icons/chart-bar.svg";
 import PieChartIcon from "../../assets/icons/chart-pie.svg";
 import GithubIcon from "../../assets/icons/github-thick.svg";
@@ -10,12 +11,22 @@ import ScrollLoadingBar from "../../components/ScrollLoadingBar";
 import ShowCase from "../../components/ShowCase";
 import CodeUsageChart from "../../components/statistics/CodeUsageChart";
 import Statistics from "../../components/statistics/Statistics";
-
 import TechStack from "../../components/techStack/TechStack";
 
 export default function HomePage() {
   return (
     <div className="flex flex-col space-y-10">
+      <Helmet>
+        <title>Home - Bence's Portfolio</title>
+        <meta
+          name="description"
+          content="Welcome to my portfolio. Full Stack Developer with a background in Electrical Engineering."
+        />
+        <meta
+          name="keywords"
+          content="Bence, Luzsisnzky, benceluzsisnzky, Portfolio, Full Stack Developer, Electrical Engineering, Software Design, ITU"
+        />
+      </Helmet>
       <ScrollLoadingBar />
       <section>
         <Availability />
