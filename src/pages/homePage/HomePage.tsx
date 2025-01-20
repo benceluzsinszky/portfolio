@@ -3,6 +3,7 @@ import BarChartIcon from "../../assets/icons/chart-bar.svg";
 import PieChartIcon from "../../assets/icons/chart-pie.svg";
 import GithubIcon from "../../assets/icons/github-thick.svg";
 import TechStackIcon from "../../assets/icons/stack.svg";
+import ogImage from "../../assets/og_image.png";
 import Availability from "../../components/Availability";
 import ContactButtons from "../../components/contactButtons/ContactButtons";
 import GithubContributionChart from "../../components/githubContributionChart/GithubContributionChart";
@@ -26,6 +27,23 @@ export default function HomePage() {
           name="keywords"
           content="Bence, Luzsisnzky, benceluzsisnzky, Portfolio, Full Stack Developer, Electrical Engineering, Software Design, ITU"
         />
+        <meta property="og:title" content="Home - Bence's Portfolio" />
+        <meta
+          property="og:description"
+          content="Welcome to my portfolio. Full Stack Developer with a background in Electrical Engineering."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://benceluzsinszky.com" />
+        <meta property="og:image" content={ogImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Home - Bence's Portfolio" />
+        <meta
+          name="twitter:description"
+          content="Welcome to my portfolio. Full Stack Developer with a background in Electrical Engineering."
+        />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="author" content="Bence Luzsisnzky" />
+        <meta name="robots" content="index, follow" />
       </Helmet>
       <ScrollLoadingBar />
       <section>
