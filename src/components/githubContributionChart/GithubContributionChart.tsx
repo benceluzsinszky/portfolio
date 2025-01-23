@@ -1,27 +1,25 @@
 import { ScrollArea } from "@mantine/core";
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { axiosConfig } from "../../utils/axiosConfig";
 import ContributionBox from "./ContributionBox";
 
-type Contribution = {
+interface Contribution {
+  id: number;
   date: string;
   count: number;
   level: number;
-};
+}
 
 export default function GithubContributionChart() {
   const viewport = useRef<HTMLDivElement>(null);
-
   const [githubData, setGitHubData] = useState<Contribution[]>([]);
 
   useEffect(() => {
     const fetchGitHubData = async () => {
-      await axios
-        .get(
-          "https://github-contributions-api.jogruber.de/v4/benceluzsinszky?y=last"
-        )
+      await axiosConfig
+        .get("/last_year_contributions")
         .then((response) => {
-          setGitHubData(response.data.contributions);
+          setGitHubData(response.data);
         })
         .catch((error) => {
           console.error(error);
