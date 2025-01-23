@@ -23,7 +23,7 @@ function App() {
         <Router>
           <div className="flex flex-col min-h-screen items-center !scroll-smooth">
             <Header />
-            <main className="flex-grow mb-auto max-w-full md:w-8/12 relative">
+            <main className="flex-grow mb-auto max-w-full md:w-10/12 relative">
               <Link to="/">
                 <img
                   src={HtmlOpenIcon}
