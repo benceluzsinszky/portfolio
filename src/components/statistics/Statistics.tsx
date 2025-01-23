@@ -53,21 +53,21 @@ export default function Statistics() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-evenly h-full">
+    <div className="flex flex-col space-y-5 h-full">
       <div>
-        <h3>
+        <h3 className="text-3xl">
           <CountUp end={calculateWorkHours()} duration={2} />
         </h3>
         <p>hours worked in software development</p>
       </div>
       <div>
-        <h3 className="mt-5">
+        <h3 className="text-3xl">
           <CountUp end={gitHubContributions} duration={2} />
         </h3>
         <p>GitHub contributions</p>
       </div>
       <div>
-        <h3 className="mt-5">
+        <h3 className="text-3xl">
           <CountUp end={linesOfCode} duration={2} />
         </h3>
         <p>lines of code pushed to GitHub</p>
