@@ -1,17 +1,12 @@
 import { PieChart } from "@mantine/charts";
 import "@mantine/charts/styles.css";
-import axios from "axios";
 import { useEffect, useState } from "react";
-
-type Repo = {
-  name: string;
-};
+import { axiosConfig } from "../../utils/axiosConfig";
 
 type CodeUsage = {
-  [key: string]: number;
+  language: string;
+  count: number;
 };
-
-const gitHubAccessToken = import.meta.env.VITE_GITHUB_PAT;
 
 const languageColors: { [key: string]: string } = {
   Batchfile: "gray.6",
@@ -28,18 +23,14 @@ const languageColors: { [key: string]: string } = {
 };
 
 export default function CodeUsageChart() {
-  const [repos, setRepos] = useState<string[]>([]);
-  const [codeUsage, setCodeUsage] = useState<CodeUsage>({});
+  const [codeUsage, setCodeUsage] = useState<CodeUsage[]>([]);
 
   const parseChartData = () => {
-    const totalUsage = Object.values(codeUsage).reduce(
-      (acc, curr) => acc + curr,
-      0
-    );
+    const totalUsage = codeUsage.reduce((acc, curr) => acc + curr.count, 0);
 
-    const usageData = Object.entries(codeUsage).map(([language, usage]) => ({
+    const usageData = codeUsage.map(({ language, count }) => ({
       name: language,
-      value: usage / totalUsage,
+      value: count / totalUsage,
       color: languageColors[language] || "gray.6",
     }));
 
@@ -64,55 +55,18 @@ export default function CodeUsageChart() {
   };
 
   useEffect(() => {
-    const fetchRepos = async () => {
-      await axios
-        .get("https://api.github.com/users/benceluzsinszky/repos", {
-          headers: {
-            Authorization: `token ${gitHubAccessToken}`,
-          },
-        })
+    const fetchCodeUsage = async () => {
+      await axiosConfig
+        .get(`/language_usage`)
         .then((response) => {
-          const repoNames = response.data.map((repo: Repo) => repo.name);
-          setRepos(repoNames);
+          setCodeUsage(response.data);
         })
         .catch((error) => {
           console.error(error);
         });
     };
-    fetchRepos();
-  }, []);
-
-  useEffect(() => {
-    const fetchCodeUsage = async () => {
-      const updatedCodeUsage: { [key: string]: number } = {};
-
-      await Promise.all(
-        repos.map(async (repo) => {
-          const response = await axios.get(
-            `https://api.github.com/repos/benceluzsinszky/${repo}/languages`,
-            {
-              headers: {
-                Authorization: `token ${gitHubAccessToken}`,
-              },
-            }
-          );
-
-          const repoCodeUsage: { [key: string]: number } = response.data;
-
-          for (const [language, usage] of Object.entries(repoCodeUsage)) {
-            if (updatedCodeUsage[language]) {
-              updatedCodeUsage[language] += usage;
-            } else {
-              updatedCodeUsage[language] = usage;
-            }
-          }
-        })
-      );
-
-      setCodeUsage(updatedCodeUsage);
-    };
     fetchCodeUsage();
-  }, [repos]);
+  }, []);
 
   return (
     <PieChart
