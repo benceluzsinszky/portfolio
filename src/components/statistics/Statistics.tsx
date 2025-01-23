@@ -1,9 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import CountUp from "react-countup";
+import { axiosConfig } from "../../utils/axiosConfig";
 
 export default function Statistics() {
   const [gitHubContributions, setGitHubContributions] = useState<number>(0);
+  const [linesOfCode, setLinesOfCode] = useState<number>(0);
 
   const calculateWorkHours = () => {
     const startOkto = new Date("2023-11-01");
@@ -24,22 +25,32 @@ export default function Statistics() {
   };
 
   useEffect(() => {
-    const fetchGitHubData = async () => {
-      await axios
-        .get("https://github-contributions-api.jogruber.de/v4/benceluzsinszky?")
+    const fetchTotalContributions = async () => {
+      await axiosConfig
+        .get("/total_contributions")
         .then((response) => {
-          const contributions: { [key: string]: number } = response.data.total;
-          const sum = Object.values(contributions).reduce(
-            (acc: number, curr: number) => acc + curr,
-            0
-          );
-          setGitHubContributions(sum);
+          setGitHubContributions(response.data.total_contributions);
         })
         .catch((error) => {
           console.error(error);
         });
     };
-    fetchGitHubData();
+    fetchTotalContributions();
+  }, []);
+
+  useEffect(() => {
+    const fetchTotalLinesOfCode = async () => {
+      await axiosConfig
+        .get("/total_lines")
+        .then((response) => {
+          console.log(response.data);
+          setLinesOfCode(response.data.total_lines);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    fetchTotalLinesOfCode();
   }, []);
 
   return (
@@ -55,6 +66,12 @@ export default function Statistics() {
           <CountUp end={gitHubContributions} duration={2} />
         </h3>
         <p>GitHub contributions</p>
+      </div>
+      <div>
+        <h3 className="mt-5">
+          <CountUp end={linesOfCode} duration={2} />
+        </h3>
+        <p>lines of code pushed to GitHub</p>
       </div>
     </div>
   );
