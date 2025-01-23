@@ -43,7 +43,6 @@ export default function Statistics() {
       await axiosConfig
         .get("/total_lines")
         .then((response) => {
-          console.log(response.data);
           setLinesOfCode(response.data.total_lines);
         })
         .catch((error) => {
