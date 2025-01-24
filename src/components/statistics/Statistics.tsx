@@ -62,15 +62,15 @@ export default function Statistics() {
       </div>
       <div>
         <h3 className="text-3xl">
-          <CountUp end={gitHubContributions} duration={2} />
-        </h3>
-        <p>GitHub contributions</p>
-      </div>
-      <div>
-        <h3 className="text-3xl">
           <CountUp end={linesOfCode} duration={2} />
         </h3>
         <p>lines of code pushed to GitHub</p>
+      </div>
+      <div>
+        <h3 className="text-3xl">
+          <CountUp end={gitHubContributions} duration={2} />
+        </h3>
+        <p>GitHub contributions</p>
       </div>
     </div>
   );
