@@ -5,6 +5,7 @@ import HtmlCloseIcon from "./assets/icons/html_close.svg";
 import HtmlOpenIcon from "./assets/icons/html_open.svg";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import AboutPage from "./pages/aboutPage/AboutPage";
 import CurriculumVitae from "./pages/cvPage/CurriculumVitae";
 import HomePage from "./pages/homePage/HomePage";
 
@@ -35,6 +36,8 @@ function App() {
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/cv.pdf" element={<CurriculumVitae />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="*" element={<HomePage />} />
                 </Routes>
               </div>
               <div className="h-20 mt-5"></div>
