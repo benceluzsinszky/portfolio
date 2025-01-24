@@ -18,16 +18,16 @@ export default function HomePage() {
   return (
     <div className="flex flex-col space-y-10">
       <Helmet>
-        <title>Home - Bence's Portfolio</title>
+        <title>Home - Bence Luzsinszky</title>
         <meta
           name="description"
           content="Welcome to my portfolio. Full Stack Developer with a background in Electrical Engineering."
         />
         <meta
           name="keywords"
-          content="Bence, Luzsisnzky, benceluzsisnzky, Portfolio, Full Stack Developer, Electrical Engineering, Software Design, ITU"
+          content="Bence, Luzsisnzky, benceluzsisnzky, Portfolio, Full Stack Developer, Electrical Engineering, Software Design, ITU, React, Tailwind CSS, Vercel, FastAPI, DigitalOcean, PostgreSQL"
         />
-        <meta property="og:title" content="Home - Bence's Portfolio" />
+        <meta property="og:title" content="Home - Bence Luzsinszky" />
         <meta
           property="og:description"
           content="Welcome to my portfolio. Full Stack Developer with a background in Electrical Engineering."
@@ -36,7 +36,7 @@ export default function HomePage() {
         <meta property="og:url" content="https://benceluzsinszky.com" />
         <meta property="og:image" content={ogImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Home - Bence's Portfolio" />
+        <meta name="twitter:title" content="Home - Bence Luzsisnzky" />
         <meta
           name="twitter:description"
           content="Welcome to my portfolio. Full Stack Developer with a background in Electrical Engineering."
