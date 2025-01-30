@@ -24,12 +24,20 @@ export default function ContributionBox({
     }
   };
 
+  const parseDate = () => {
+    return new Date(date).toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   return (
     <div
       className={`h-3 md:h-4 w-3 md:w-4 m-0.5 rounded-sm ${getColor(
         level
       )} hover:brightness-125`}
-      title={`${count} contributions on ${date}`}
+      title={`${count} contributions on ${parseDate()}`}
     ></div>
   );
 }
