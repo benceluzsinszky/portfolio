@@ -51,6 +51,7 @@ export default function Journey() {
           icon={BoschLogo}
           title="Bosch"
           description="Manufacturing Intern"
+          swapped
         />
       </div>
 
