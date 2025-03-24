@@ -1,7 +1,6 @@
 import BoschLogo from "../../assets/logos/bosch_logo.jpg";
 import ITULogo from "../../assets/logos/itu_logo.jpg";
 import OktogridLogo from "../../assets/logos/oktogrid_logo.jpg";
-import TenPaoLogo from "../../assets/logos/ten_pao_logo.jpg";
 import UniMiskolcLogo from "../../assets/logos/university_of_miskolc_logo.jpg";
 import JourneyItem from "./JourneyItem";
 
@@ -46,13 +45,6 @@ export default function Journey() {
           icon={UniMiskolcLogo}
           title="University of Miskolc"
           description="Graduated BSc in Electrical Engineering"
-        />
-        <JourneyItem
-          date="Sep 2019"
-          icon={TenPaoLogo}
-          title="Ten Pao Electronics"
-          description="Electronic Development Engineer"
-          swapped
         />
         <JourneyItem
           date="Apr 2017"
