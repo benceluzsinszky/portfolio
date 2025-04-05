@@ -208,8 +208,12 @@ export default function FallingSand() {
     <div className="flex flex-row justify-between h-full">
       <canvas ref={canvasRef} className="border border-slate-50"></canvas>
 
-      <div>
+      <div className="w-1/3">
         <h2>Descirption</h2>
+        <p>
+          This is a simple falling sand simulation. You can add sand by clicking
+          on the canvas. The sand will fall down and spread out naturally.
+        </p>
         <button
           onClick={() => {
             clearGrid();
@@ -224,7 +228,7 @@ export default function FallingSand() {
           }}
           className="bg-slate-50 text-black rounded-md p-2 m-2"
         >
-          {shaderEnabled ? "Apply" : "Remove"} Shader
+          {shaderEnabled ? "Remove" : "Apply"} Shader
         </button>
       </div>
     </div>
