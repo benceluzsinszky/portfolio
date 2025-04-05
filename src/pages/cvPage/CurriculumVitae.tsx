@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -10,6 +11,14 @@ export default function CurriculumVitae() {
     "pdfjs-dist/build/pdf.worker.min.mjs",
     import.meta.url
   ).toString();
+
+  const [width, setWidth] = useState(window.innerWidth * 0.75);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth * 0.75);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="flex items-center">
@@ -47,10 +56,11 @@ export default function CurriculumVitae() {
         <meta name="author" content="Bence Luzsisnzky" />
         <meta name="robots" content="index, follow" />
       </Helmet>
-      <Document file={CV} className="space-y-2">
-        <Page pageNumber={1} scale={2} />
-        <Page pageNumber={2} scale={2} />
-      </Document>
+      <div style={{ width: "75vw" }}>
+        <Document file={CV} className="space-y-2">
+          <Page pageNumber={1} width={width} />
+        </Document>
+      </div>
     </div>
   );
 }
