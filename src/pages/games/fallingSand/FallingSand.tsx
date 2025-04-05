@@ -1,4 +1,4 @@
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ColorPicker, Slider, Space } from "@mantine/core";
 
@@ -32,11 +32,9 @@ export default function FallingSand() {
     };
     clearGrid();
     setResolution(valueMap[value]);
-    console.log(valueMap[value]);
   };
 
   const changeColor = (color: string) => {
-    console.log(color);
     setColor(color);
   };
 
@@ -86,7 +84,9 @@ export default function FallingSand() {
     if (!grid) return;
 
     const parseHsl = (color: string): HslColor => {
-      const match = color.match(/hsl\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)/);
+      const match = color.match(
+        /hsl\(\s*(-?\d+)\s*,\s*(-?\d+)%\s*,\s*(-?\d+)%\s*\)/
+      );
 
       if (!match) return { h: 32, s: 74, l: 80 };
 
@@ -104,7 +104,6 @@ export default function FallingSand() {
 
     const choseSandColor = () => {
       const hslColor = parseHsl(changeColorRef.current);
-      console.log(hslColor);
       hslColor.l = Math.floor(Math.random() * 11) + (hslColor.l - 5);
       return parseColorString(hslColor);
     };
@@ -112,7 +111,6 @@ export default function FallingSand() {
     const applyShader = (x: number, y: number) => {
       const color = gridRef.current[y][x];
       const hslColor = parseHsl(color);
-      if (!hslColor) return color;
 
       let depth = 0;
       for (let i = y; i > 0; i--) {
