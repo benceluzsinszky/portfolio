@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import { ColorPicker } from "@mantine/core";
+
 type HslColor = {
   h: number;
   s: number;
@@ -9,6 +11,14 @@ type HslColor = {
 export default function FallingSand() {
   const [shaderEnabled, setShaderEnabled] = useState(false);
   const shaderEnabledRef = useRef(shaderEnabled);
+
+  const [color, setColor] = useState("hsl(32,74%,80%)");
+  const changeColorRef = useRef(color);
+
+  const changeColor = (color: string) => {
+    console.log(color);
+    setColor(color);
+  };
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number | null>(null);
@@ -33,7 +43,8 @@ export default function FallingSand() {
 
   useEffect(() => {
     shaderEnabledRef.current = shaderEnabled;
-  }, [shaderEnabled]);
+    changeColorRef.current = color;
+  }, [shaderEnabled, color]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -49,10 +60,10 @@ export default function FallingSand() {
     const grid = gridRef.current;
     if (!grid) return;
 
-    const parseHsl = (color: string): HslColor | null => {
+    const parseHsl = (color: string): HslColor => {
       const match = color.match(/hsl\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)/);
 
-      if (!match) return null;
+      if (!match) return { h: 32, s: 74, l: 80 };
 
       const [, h, s, l] = match;
       return {
@@ -67,9 +78,10 @@ export default function FallingSand() {
     };
 
     const choseSandColor = () => {
-      const brightness = Math.floor(Math.random() * (85 - 75 + 1)) + 75;
-      const colors = [`hsl(32,74%,${brightness}%)`];
-      return colors[Math.floor(Math.random() * colors.length)];
+      const hslColor = parseHsl(changeColorRef.current);
+      console.log(hslColor);
+      hslColor.l = Math.floor(Math.random() * 11) + (hslColor.l - 5);
+      return parseColorString(hslColor);
     };
 
     const applyShader = (x: number, y: number) => {
@@ -230,6 +242,27 @@ export default function FallingSand() {
         >
           {shaderEnabled ? "Remove" : "Apply"} Shader
         </button>
+        <ColorPicker
+          format="hsl"
+          value={color}
+          onChange={changeColor}
+          swatches={[
+            "hsl(0, 0%, 18%)",
+            "hsl(210, 6%, 56%)",
+            "hsl(0, 95%, 64%)",
+            "hsl(336, 76%, 59%)",
+            "hsl(286, 65%, 58%)",
+            "hsl(250, 84%, 63%)",
+            "hsl(228, 89%, 63%)",
+            "hsl(210, 78%, 52%)",
+            "hsl(189, 80%, 43%)",
+            "hsl(163, 82%, 40%)",
+            "hsl(137, 54%, 51%)",
+            "hsl(83, 73%, 45%)",
+            "hsl(40, 97%, 50%)",
+            "hsl(26, 98%, 54%)",
+          ]}
+        />
       </div>
     </div>
   );
