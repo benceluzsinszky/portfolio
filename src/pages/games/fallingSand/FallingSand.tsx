@@ -1,6 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+type HslColor = {
+  h: number;
+  s: number;
+  l: number;
+};
 
 export default function FallingSand() {
+  const [shaderEnabled, setShaderEnabled] = useState(false);
+  const shaderEnabledRef = useRef(shaderEnabled);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number | null>(null);
 
@@ -23,6 +32,10 @@ export default function FallingSand() {
   };
 
   useEffect(() => {
+    shaderEnabledRef.current = shaderEnabled;
+  }, [shaderEnabled]);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -36,15 +49,48 @@ export default function FallingSand() {
     const grid = gridRef.current;
     if (!grid) return;
 
+    const parseHsl = (color: string): HslColor | null => {
+      const match = color.match(/hsl\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)/);
+
+      if (!match) return null;
+
+      const [, h, s, l] = match;
+      return {
+        h: parseInt(h, 10),
+        s: parseInt(s, 10),
+        l: parseInt(l, 10),
+      };
+    };
+
+    const parseColorString = (hslColor: HslColor): string => {
+      return `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
+    };
+
     const choseSandColor = () => {
-      const colors = [
-        "rgb(246,215,176)",
-        "rgb(242,210,169)",
-        "rgb(236,204,162)",
-        "rgb(231,196,150)",
-        "rgb(225,191,146)",
-      ];
+      const brightness = Math.floor(Math.random() * (85 - 75 + 1)) + 75;
+      const colors = [`hsl(32,74%,${brightness}%)`];
       return colors[Math.floor(Math.random() * colors.length)];
+    };
+
+    const applyShader = (x: number, y: number) => {
+      const color = gridRef.current[y][x];
+      const hslColor = parseHsl(color);
+      if (!hslColor) return color;
+
+      let depth = 0;
+      for (let i = y; i > 0; i--) {
+        if (gridRef.current[i][x] !== "") {
+          depth++;
+        } else {
+          break;
+        }
+      }
+      if (depth > 0) {
+        hslColor.l = Math.max(5, hslColor.l - depth * 5);
+        const newColor = parseColorString(hslColor);
+        return newColor;
+      }
+      return color;
     };
 
     const addSandAtMouse = (event: MouseEvent) => {
@@ -122,7 +168,11 @@ export default function FallingSand() {
       for (let y = 0; y < resolution; y++) {
         for (let x = 0; x < resolution; x++) {
           if (gridRef.current[y][x] !== "") {
-            context.fillStyle = gridRef.current[y][x];
+            if (shaderEnabledRef.current) {
+              context.fillStyle = applyShader(x, y);
+            } else {
+              context.fillStyle = gridRef.current[y][x];
+            }
             context.fillRect(
               x * pixelSize,
               y * pixelSize,
@@ -167,6 +217,14 @@ export default function FallingSand() {
           className="bg-slate-50 text-black rounded-md p-2 m-2"
         >
           Clear
+        </button>
+        <button
+          onClick={() => {
+            setShaderEnabled(!shaderEnabled);
+          }}
+          className="bg-slate-50 text-black rounded-md p-2 m-2"
+        >
+          {shaderEnabled ? "Apply" : "Remove"} Shader
         </button>
       </div>
     </div>
