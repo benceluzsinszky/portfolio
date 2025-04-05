@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import AboutPage from "./pages/aboutPage/AboutPage";
 import CurriculumVitae from "./pages/cvPage/CurriculumVitae";
+import FallingSand from "./pages/games/fallingSand/FallingSand";
 import HomePage from "./pages/homePage/HomePage";
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/cv.pdf" element={<CurriculumVitae />} />
                   <Route path="/about" element={<AboutPage />} />
+                  <Route path="/falling_sand" element={<FallingSand />} />
                   <Route path="*" element={<HomePage />} />
                 </Routes>
               </div>
