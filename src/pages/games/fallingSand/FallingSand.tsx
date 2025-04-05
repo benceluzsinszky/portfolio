@@ -1,11 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 
-import { ColorPicker } from "@mantine/core";
+import { ColorPicker, Slider, Space } from "@mantine/core";
 
 type HslColor = {
   h: number;
   s: number;
   l: number;
+};
+
+type ValueMap = {
+  [key: number]: number;
 };
 
 export default function FallingSand() {
@@ -15,6 +19,22 @@ export default function FallingSand() {
   const [color, setColor] = useState("hsl(32,74%,80%)");
   const changeColorRef = useRef(color);
 
+  const [resolution, setResolution] = useState(32);
+
+  const handleResolutionChange = (value: number) => {
+    const valueMap: ValueMap = {
+      0: 8,
+      20: 16,
+      40: 32,
+      60: 64,
+      80: 128,
+      100: 256,
+    };
+    clearGrid();
+    setResolution(valueMap[value]);
+    console.log(valueMap[value]);
+  };
+
   const changeColor = (color: string) => {
     console.log(color);
     setColor(color);
@@ -23,7 +43,6 @@ export default function FallingSand() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number | null>(null);
 
-  const resolution = 32;
   const pixelSize = Math.floor(window.innerWidth / 3 / resolution);
   const canvasSize = pixelSize * resolution;
 
@@ -45,6 +64,12 @@ export default function FallingSand() {
     shaderEnabledRef.current = shaderEnabled;
     changeColorRef.current = color;
   }, [shaderEnabled, color]);
+
+  useEffect(() => {
+    gridRef.current = Array.from({ length: resolution }, () =>
+      Array(resolution).fill("")
+    );
+  }, [resolution]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -214,55 +239,77 @@ export default function FallingSand() {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  }, []);
+  }, [resolution]);
 
   return (
-    <div className="flex flex-row justify-between h-full">
-      <canvas ref={canvasRef} className="border border-slate-50"></canvas>
-
-      <div className="w-1/3">
-        <h2>Descirption</h2>
-        <p>
-          This is a simple falling sand simulation. You can add sand by clicking
-          on the canvas. The sand will fall down and spread out naturally.
-        </p>
-        <button
-          onClick={() => {
-            clearGrid();
-          }}
-          className="bg-slate-50 text-black rounded-md p-2 m-2"
-        >
-          Clear
-        </button>
-        <button
-          onClick={() => {
-            setShaderEnabled(!shaderEnabled);
-          }}
-          className="bg-slate-50 text-black rounded-md p-2 m-2"
-        >
-          {shaderEnabled ? "Remove" : "Apply"} Shader
-        </button>
-        <ColorPicker
-          format="hsl"
-          value={color}
-          onChange={changeColor}
-          swatches={[
-            "hsl(0, 0%, 18%)",
-            "hsl(210, 6%, 56%)",
-            "hsl(0, 95%, 64%)",
-            "hsl(336, 76%, 59%)",
-            "hsl(286, 65%, 58%)",
-            "hsl(250, 84%, 63%)",
-            "hsl(228, 89%, 63%)",
-            "hsl(210, 78%, 52%)",
-            "hsl(189, 80%, 43%)",
-            "hsl(163, 82%, 40%)",
-            "hsl(137, 54%, 51%)",
-            "hsl(83, 73%, 45%)",
-            "hsl(40, 97%, 50%)",
-            "hsl(26, 98%, 54%)",
-          ]}
-        />
+    <div>
+      <div className="flex flex-row justify-between h-full">
+        <canvas
+          ref={canvasRef}
+          className="border border-slate-50 min-w-[1/3vw] max-w-[1/3vw] max-h-[1/3vw] min-h-[1/3vw]"
+        ></canvas>
+        <div className="w-1/3">
+          <h2>Descirption</h2>
+          <p>
+            This is a simple falling sand simulation. You can add sand by
+            clicking on the canvas. The sand will fall down and spread out
+            naturally.
+          </p>
+          <button
+            onClick={() => {
+              clearGrid();
+            }}
+            className="bg-slate-50 text-black rounded-md p-2 m-2"
+          >
+            Clear
+          </button>
+          <button
+            onClick={() => {
+              setShaderEnabled(!shaderEnabled);
+            }}
+            className="bg-slate-50 text-black rounded-md p-2 m-2"
+          >
+            {shaderEnabled ? "Remove" : "Apply"} Shader
+          </button>
+          <Space h="lg" />
+          <h3>Pick a color:</h3>
+          <ColorPicker
+            format="hsl"
+            value={color}
+            onChange={changeColor}
+            swatches={[
+              "hsl(0, 0%, 18%)",
+              "hsl(210, 6%, 56%)",
+              "hsl(0, 95%, 64%)",
+              "hsl(336, 76%, 59%)",
+              "hsl(286, 65%, 58%)",
+              "hsl(250, 84%, 63%)",
+              "hsl(228, 89%, 63%)",
+              "hsl(210, 78%, 52%)",
+              "hsl(189, 80%, 43%)",
+              "hsl(163, 82%, 40%)",
+              "hsl(137, 54%, 51%)",
+              "hsl(83, 73%, 45%)",
+              "hsl(40, 97%, 50%)",
+              "hsl(26, 98%, 54%)",
+            ]}
+          />
+          <Space h="lg" />
+          <h3>Grid Size:</h3>
+          <Slider
+            defaultValue={40}
+            step={20}
+            onChange={handleResolutionChange}
+            marks={[
+              { value: 0, label: "xs" },
+              { value: 20, label: "s" },
+              { value: 40, label: "m" },
+              { value: 60, label: "l" },
+              { value: 80, label: "xl" },
+              { value: 100, label: "xxl" },
+            ]}
+          />
+        </div>
       </div>
     </div>
   );
