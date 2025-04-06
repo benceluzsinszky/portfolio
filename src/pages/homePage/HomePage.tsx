@@ -1,3 +1,4 @@
+import { Space } from "@mantine/core";
 import { Helmet } from "react-helmet-async";
 import BarChartIcon from "../../assets/icons/chart-bar.svg";
 import PieChartIcon from "../../assets/icons/chart-pie.svg";
@@ -58,9 +59,16 @@ export default function HomePage() {
           <h1>Hi, I'm Bence</h1>
           <h2>And this is my portfolio</h2>
           <p className="mt-5">
-            I am a Full Stack developer with a background in Electrical
-            Engineering. I will graduate MSc in Software Design from the IT
-            University of Copenhagen in the Summer of 2025.
+            I am a Full Stack developer living in Copenhgaen with a background
+            in Electrical Engineering. I will graduate MSc in Software Design
+            from the IT University of Copenhagen in the Summer of 2025.
+            <Space h="md" />
+            In my free time, I enjoy creating games and simulations. You can try
+            some out{" "}
+            <a href="#games" className="text-blue-500 hover:underline">
+              here
+            </a>
+            .
           </p>
         </section>
         <section>
