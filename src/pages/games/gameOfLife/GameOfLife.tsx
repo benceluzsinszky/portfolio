@@ -205,7 +205,7 @@ export default function GameOfLife() {
 
   return (
     <div>
-      <h1 className="text-center mb-10">Conway's Game Of Life</h1>
+      <h1 className="text-center my-10">Conway's Game Of Life</h1>
       <div className="flex flex-col md:flex-row items-start justify-between h-full">
         <canvas ref={canvasRef} className="border border-slate-50"></canvas>
         <div className="w-1/3">

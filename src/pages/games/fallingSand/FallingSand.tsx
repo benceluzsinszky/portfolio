@@ -240,6 +240,7 @@ export default function FallingSand() {
 
   return (
     <div>
+      <h1 className="text-center my-10">Falling Sand Simulation</h1>
       <div className="flex flex-col md:flex-row items-center justify-between h-full">
         <canvas ref={canvasRef} className="border border-slate-50"></canvas>
         <div className="w-1/3">
@@ -274,7 +275,7 @@ export default function FallingSand() {
             className="w-full"
           />
           <Space h="lg" />
-          <h3>Grid Size:</h3>
+          <h3>Grid Resolution:</h3>
           <Slider
             defaultValue={40}
             color="grey"
