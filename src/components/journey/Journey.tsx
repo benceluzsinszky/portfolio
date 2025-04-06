@@ -8,7 +8,7 @@ export default function Journey() {
   return (
     <div className="w-full flex flex-col items-start md:items-center">
       <div className="h-10 w-1 bg-gradient-to-t from-gray-200 to-gray-950"></div>
-      <div className="relative flex flex-col w-full md:w-3/4 items-start md:items-center ">
+      <div className="relative flex flex-col w-full items-start md:items-center ">
         <div className="absolute top-0 bottom-0 left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gray-200 z-0"></div>
 
         <JourneyItem

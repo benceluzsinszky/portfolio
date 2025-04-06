@@ -10,7 +10,7 @@ export default function ShowCase({ title, children, icon }: ShowCaseProps) {
       <div>
         <div className="inline-flex items-center mb-3 border rounded-full py-1 md:py-2 px-2 md:px-4 w-auto bg-gray-950">
           <img src={icon} alt={title} className="w-5 md:w-6 rounded-md" />
-          <p className="mx-2 text-2xs md:text-sm text-nowrap">{title}</p>
+          <p className="mx-2 text-2xs md:text-sm">{title}</p>
         </div>
       </div>
       {children}

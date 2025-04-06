@@ -46,12 +46,12 @@ export default function JourneyItem({
   };
 
   return (
-    <div className="my-10 flex flex-col md:flex-row items-start md:items-center w-full z-10">
-      <div className="flex-1 pl-6 md:pl-0">
+    <div className="relative my-10 flex flex-col md:flex-row items-start md:items-center min-w-full z-10">
+      <div className="flex-1 pl-6 md:pl-0 md:mr-5">
         {swapped ? viewDate() : viewShowCase()}
       </div>
-      <div className="hidden md:block w-5 h-5 bg-gray-950 border-4 border-gray-200 rounded-full mx-5"></div>
-      <div className="pl-6 md:pl-0 w-full md:flex-1">
+      <div className="hidden absolute left-1/2 transform -translate-x-1/2 md:block w-4 h-4 bg-gray-950 border-4 border-gray-200 rounded-full"></div>
+      <div className="md:flex-1 pl-6 md:pl-0 w-full md:ml-5">
         {!swapped ? viewDate() : viewShowCase()}
       </div>
     </div>
