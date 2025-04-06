@@ -8,6 +8,7 @@ import TechStackIcon from "../../assets/icons/stack.svg";
 import ogImage from "../../assets/og_image.png";
 import Availability from "../../components/Availability";
 import ContactButtons from "../../components/contactButtons/ContactButtons";
+import Games from "../../components/games/Games";
 import GithubContributionChart from "../../components/githubContributionChart/GithubContributionChart";
 import Journey from "../../components/journey/Journey";
 import ScrollLoadingBar from "../../components/ScrollLoadingBar";
@@ -82,6 +83,12 @@ export default function HomePage() {
               <TechStack />
             </ShowCase>
           </div>
+        </section>
+        <section className="flex flex-col items-start md:items-center space-y-5 md:space-y-10 ">
+          <h2 className="text-center" id="games">
+            Games
+          </h2>
+          <Games />
         </section>
         <section className="flex flex-col items-start md:items-center space-y-5 md:space-y-10 ">
           <h2 className="text-center">My Journey</h2>
