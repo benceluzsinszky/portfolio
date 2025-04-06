@@ -63,8 +63,8 @@ export default function HomePage() {
             in Electrical Engineering. I will graduate MSc in Software Design
             from the IT University of Copenhagen in the Summer of 2025.
             <Space h="md" />
-            In my free time, I enjoy creating games and simulations. You can try
-            some out{" "}
+            In my free time, I enjoy creating games and simulations, try some
+            out{" "}
             <a href="#games" className="text-blue-500 hover:underline">
               here
             </a>
