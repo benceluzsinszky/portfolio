@@ -3,12 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import ogImage from "../../../assets/og_image.png";
 
-type HslColor = {
-  h: number;
-  s: number;
-  l: number;
-};
-
 export default function GameOfLife() {
   const [isRunning, setIsRunning] = useState(false);
 
