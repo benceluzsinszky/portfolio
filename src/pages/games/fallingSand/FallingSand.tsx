@@ -42,7 +42,6 @@ export default function FallingSand() {
 
   const canvasSize = Math.floor(window.innerWidth / 3);
   const pixelSize = canvasSize / resolution;
-  console.log(pixelSize, canvasSize);
 
   const gridRef = useRef<string[][]>(
     Array.from({ length: resolution }, () => Array(resolution).fill(""))
