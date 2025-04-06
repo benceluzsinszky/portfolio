@@ -92,7 +92,7 @@ export default function HomePage() {
             </ShowCase>
           </div>
         </section>
-        <section className="flex flex-col items-start md:items-center space-y-5 md:space-y-10 ">
+        <section className="hidden md:flex flex-col items-start md:items-center space-y-5 md:space-y-10 ">
           <h2 className="text-center" id="games">
             Games
           </h2>
