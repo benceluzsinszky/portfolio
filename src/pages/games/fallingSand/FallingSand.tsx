@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { ColorPicker, Slider, Space } from "@mantine/core";
+import { Button, ColorPicker, Slider, Space } from "@mantine/core";
 
 type HslColor = {
   h: number;
@@ -13,6 +13,8 @@ type ValueMap = {
 };
 
 export default function FallingSand() {
+  const [windowWidth, setwindowWidth] = useState(window.innerWidth);
+
   const [shaderEnabled, setShaderEnabled] = useState(false);
   const shaderEnabledRef = useRef(shaderEnabled);
 
@@ -57,6 +59,14 @@ export default function FallingSand() {
       }
     }
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setwindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     shaderEnabledRef.current = shaderEnabled;
@@ -237,14 +247,18 @@ export default function FallingSand() {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  }, [resolution]);
+  }, [resolution, window.innerWidth]);
 
   return (
     <div>
-      <div className="flex flex-row justify-between h-full">
+      <div className="flex flex-col md:flex-row items-center justify-between h-full">
         <canvas
           ref={canvasRef}
-          className="border border-slate-50 min-w-[1/3vw] max-w-[1/3vw] max-h-[1/3vw] min-h-[1/3vw]"
+          className="border border-slate-50"
+          style={{
+            width: `${windowWidth / 3}px`,
+            height: `${windowWidth / 3}px`,
+          }}
         ></canvas>
         <div className="w-1/3">
           <h2>Descirption</h2>
@@ -253,30 +267,14 @@ export default function FallingSand() {
             clicking on the canvas. The sand will fall down and spread out
             naturally.
           </p>
-          <button
-            onClick={() => {
-              clearGrid();
-            }}
-            className="bg-slate-50 text-black rounded-md p-2 m-2"
-          >
-            Clear
-          </button>
-          <button
-            onClick={() => {
-              setShaderEnabled(!shaderEnabled);
-            }}
-            className="bg-slate-50 text-black rounded-md p-2 m-2"
-          >
-            {shaderEnabled ? "Remove" : "Apply"} Shader
-          </button>
-          <Space h="lg" />
+
           <h3>Pick a color:</h3>
           <ColorPicker
             format="hsl"
             value={color}
             onChange={changeColor}
             swatches={[
-              "hsl(0, 0%, 18%)",
+              "hsl(32,74%,80%)",
               "hsl(210, 6%, 56%)",
               "hsl(0, 95%, 64%)",
               "hsl(336, 76%, 59%)",
@@ -291,12 +289,15 @@ export default function FallingSand() {
               "hsl(40, 97%, 50%)",
               "hsl(26, 98%, 54%)",
             ]}
+            className="w-full"
           />
           <Space h="lg" />
           <h3>Grid Size:</h3>
           <Slider
             defaultValue={40}
+            color="grey"
             step={20}
+            showLabelOnHover={false}
             onChange={handleResolutionChange}
             marks={[
               { value: 0, label: "xs" },
@@ -307,6 +308,29 @@ export default function FallingSand() {
               { value: 100, label: "xxl" },
             ]}
           />
+
+          <div className="flex flex-row justify-evenly items-center mt-10">
+            <Button
+              color="white"
+              variant="outline"
+              onClick={() => {
+                clearGrid();
+              }}
+              className="w-1/3"
+            >
+              Clear
+            </Button>
+            <Button
+              color="white"
+              variant="outline"
+              onClick={() => {
+                setShaderEnabled(!shaderEnabled);
+              }}
+              className="w-1/3"
+            >
+              {shaderEnabled ? "Remove" : "Apply"} Shader
+            </Button>
+          </div>
         </div>
       </div>
     </div>
