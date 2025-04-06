@@ -6,7 +6,11 @@ export default function HomeButton() {
   if (location.pathname === "/") return null;
   return (
     <Link to="/" className="w-full">
-      <img src={HomeIcon} alt="Home Icon" className="m-2 size-8" />
+      <img
+        src={HomeIcon}
+        alt="Home Icon"
+        className="m-2 size-8 opacity-80 hover:opacity-100 transition-opacity duration-200 ease-in-out"
+      />
     </Link>
   );
 }
