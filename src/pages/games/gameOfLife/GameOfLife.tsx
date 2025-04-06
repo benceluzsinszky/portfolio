@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-
 import { Button, Slider, Space } from "@mantine/core";
+import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import ogImage from "../../../assets/og_image.png";
 
 type HslColor = {
   h: number;
@@ -209,6 +210,47 @@ export default function GameOfLife() {
 
   return (
     <div>
+      <Helmet>
+        <title>Game Of Life</title>
+        <meta
+          name="description"
+          content="The Game of Life is a cellular automaton devised by the British
+                mathematician John Horton Conway in 1970. It is a zero-player game,
+                meaning that its evolution is determined by its initial state., with
+                no further input from humans. One interacts with the Game of Life by
+                creating an initial configuration and observing how it evolves."
+        />
+        <meta
+          name="keywords"
+          content="Bence, Luzsisnzky, benceluzsisnzky, Portfolio, Full Stack Developer, Electrical Engineering, Software Design, ITU, React, Tailwind CSS, Vercel, FastAPI, DigitalOcean, PostgreSQL, Falling Sand, Falling, Sand, Simulation, Game, Game Of Life, Conway"
+        />
+        <meta property="og:title" content="Game Of Life - Bence Luzsinszky" />
+        <meta
+          property="og:description"
+          content="The Game of Life is a cellular automaton devised by the British
+                mathematician John Horton Conway in 1970. It is a zero-player game,
+                meaning that its evolution is determined by its initial state., with
+                no further input from humans. One interacts with the Game of Life by
+                creating an initial configuration and observing how it evolves."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://benceluzsinszky.com" />
+        <meta property="og:image" content={ogImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Game Of Life - Bence Luzsisnzky" />
+        <meta
+          name="twitter:description"
+          content="The Game of Life is a cellular automaton devised by the British
+                mathematician John Horton Conway in 1970. It is a zero-player game,
+                meaning that its evolution is determined by its initial state., with
+                no further input from humans. One interacts with the Game of Life by
+                creating an initial configuration and observing how it evolves."
+        />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="author" content="Bence Luzsisnzky" />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+
       <h1 className="text-center mb-10">Conway's Game Of Life</h1>
       <div className="flex flex-col md:flex-row items-start justify-between h-full">
         <canvas ref={canvasRef} className="border border-slate-50"></canvas>

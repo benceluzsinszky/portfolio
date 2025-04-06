@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-
 import { Button, ColorPicker, Slider, Space } from "@mantine/core";
+import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import ogImage from "../../../assets/og_image.png";
 
 type HslColor = {
   h: number;
@@ -244,6 +245,35 @@ export default function FallingSand() {
 
   return (
     <div>
+      <Helmet>
+        <title>Falling Sand</title>
+        <meta
+          name="description"
+          content="This is a simple falling sand simulation. You can add sand by clicking on the canvas. The sand will fall down and spread out naturally."
+        />
+        <meta
+          name="keywords"
+          content="Bence, Luzsisnzky, benceluzsisnzky, Portfolio, Full Stack Developer, Electrical Engineering, Software Design, ITU, React, Tailwind CSS, Vercel, FastAPI, DigitalOcean, PostgreSQL, Falling Sand, Falling, Sand, Simulation, Game"
+        />
+        <meta property="og:title" content="Falling Sand - Bence Luzsinszky" />
+        <meta
+          property="og:description"
+          content="This is a simple falling sand simulation. You can add sand by clicking on the canvas. The sand will fall down and spread out naturally."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://benceluzsinszky.com" />
+        <meta property="og:image" content={ogImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Falling Sand - Bence Luzsisnzky" />
+        <meta
+          name="twitter:description"
+          content="This is a simple falling sand simulation. You can add sand by clicking on the canvas. The sand will fall down and spread out naturally."
+        />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="author" content="Bence Luzsisnzky" />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+
       <h1 className="text-center mb-10">Falling Sand Simulation</h1>
       <div className="flex flex-col md:flex-row items-start justify-between h-full">
         <canvas ref={canvasRef} className="border border-slate-50"></canvas>
