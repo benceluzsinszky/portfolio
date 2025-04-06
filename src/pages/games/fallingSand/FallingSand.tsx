@@ -58,6 +58,10 @@ export default function FallingSand() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     shaderEnabledRef.current = shaderEnabled;
     changeColorRef.current = color;
   }, [shaderEnabled, color]);
@@ -240,18 +244,19 @@ export default function FallingSand() {
 
   return (
     <div>
-      <h1 className="text-center my-10">Falling Sand Simulation</h1>
-      <div className="flex flex-col md:flex-row items-center justify-between h-full">
+      <h1 className="text-center mb-10">Falling Sand Simulation</h1>
+      <div className="flex flex-col md:flex-row items-start justify-between h-full">
         <canvas ref={canvasRef} className="border border-slate-50"></canvas>
         <div className="w-1/3">
-          <h2>Descirption</h2>
+          <h3 className="mt-0">Descirption</h3>
           <p>
             This is a simple falling sand simulation. You can add sand by
             clicking on the canvas. The sand will fall down and spread out
             naturally.
           </p>
+          <Space h="lg" />
 
-          <h3>Pick a color:</h3>
+          <h3>Pick a color</h3>
           <ColorPicker
             format="hsl"
             value={color}
@@ -275,9 +280,9 @@ export default function FallingSand() {
             className="w-full"
           />
           <Space h="lg" />
-          <h3>Grid Resolution:</h3>
+          <h3>Grid Resolution</h3>
           <Slider
-            defaultValue={40}
+            defaultValue={50}
             color="grey"
             step={25}
             showLabelOnHover={false}

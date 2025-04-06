@@ -57,6 +57,10 @@ export default function GameOfLife() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     gridRef.current = Array.from({ length: resolution }, () =>
       Array(resolution).fill("")
     );
@@ -205,11 +209,11 @@ export default function GameOfLife() {
 
   return (
     <div>
-      <h1 className="text-center my-10">Conway's Game Of Life</h1>
+      <h1 className="text-center mb-10">Conway's Game Of Life</h1>
       <div className="flex flex-col md:flex-row items-start justify-between h-full">
         <canvas ref={canvasRef} className="border border-slate-50"></canvas>
         <div className="w-1/3">
-          <h2 className="mt-0">Descirption</h2>
+          <h3 className="mt-0">Descirption</h3>
           <p>
             The Game of Life is a cellular automaton devised by the British
             mathematician John Horton Conway in 1970. It is a zero-player game,
@@ -217,10 +221,8 @@ export default function GameOfLife() {
             no further input from humans. One interacts with the Game of Life by
             creating an initial configuration and observing how it evolves.
           </p>
-
           <Space h="lg" />
-
-          <h3>Grid Resolution:</h3>
+          <h3>Grid Resolution</h3>
           <Slider
             defaultValue={3}
             color="grey"
