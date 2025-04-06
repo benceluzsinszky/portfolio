@@ -13,8 +13,6 @@ type ValueMap = {
 };
 
 export default function FallingSand() {
-  const [windowWidth, setwindowWidth] = useState(window.innerWidth);
-
   const [shaderEnabled, setShaderEnabled] = useState(false);
   const shaderEnabledRef = useRef(shaderEnabled);
 
@@ -26,11 +24,10 @@ export default function FallingSand() {
   const handleResolutionChange = (value: number) => {
     const valueMap: ValueMap = {
       0: 8,
-      20: 16,
-      40: 32,
-      60: 64,
-      80: 128,
-      100: 256,
+      25: 16,
+      50: 32,
+      75: 64,
+      100: 128,
     };
     clearGrid();
     setResolution(valueMap[value]);
@@ -43,8 +40,9 @@ export default function FallingSand() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number | null>(null);
 
-  const pixelSize = Math.floor(window.innerWidth / 3 / resolution);
-  const canvasSize = pixelSize * resolution;
+  const canvasSize = Math.floor(window.innerWidth / 3);
+  const pixelSize = canvasSize / resolution;
+  console.log(pixelSize, canvasSize);
 
   const gridRef = useRef<string[][]>(
     Array.from({ length: resolution }, () => Array(resolution).fill(""))
@@ -59,14 +57,6 @@ export default function FallingSand() {
       }
     }
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setwindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     shaderEnabledRef.current = shaderEnabled;
@@ -252,14 +242,7 @@ export default function FallingSand() {
   return (
     <div>
       <div className="flex flex-col md:flex-row items-center justify-between h-full">
-        <canvas
-          ref={canvasRef}
-          className="border border-slate-50"
-          style={{
-            width: `${windowWidth / 3}px`,
-            height: `${windowWidth / 3}px`,
-          }}
-        ></canvas>
+        <canvas ref={canvasRef} className="border border-slate-50"></canvas>
         <div className="w-1/3">
           <h2>Descirption</h2>
           <p>
@@ -296,16 +279,15 @@ export default function FallingSand() {
           <Slider
             defaultValue={40}
             color="grey"
-            step={20}
+            step={25}
             showLabelOnHover={false}
             onChange={handleResolutionChange}
             marks={[
               { value: 0, label: "xs" },
-              { value: 20, label: "s" },
-              { value: 40, label: "m" },
-              { value: 60, label: "l" },
-              { value: 80, label: "xl" },
-              { value: 100, label: "xxl" },
+              { value: 25, label: "s" },
+              { value: 50, label: "m" },
+              { value: 75, label: "l" },
+              { value: 100, label: "xl" },
             ]}
           />
 
@@ -316,19 +298,17 @@ export default function FallingSand() {
               onClick={() => {
                 clearGrid();
               }}
-              className="w-1/3"
             >
               Clear
             </Button>
             <Button
-              color="white"
-              variant="outline"
+              color={shaderEnabled ? "black" : "white"}
+              variant={shaderEnabled ? "white" : "outline"}
               onClick={() => {
                 setShaderEnabled(!shaderEnabled);
               }}
-              className="w-1/3"
             >
-              {shaderEnabled ? "Remove" : "Apply"} Shader
+              Apply Shader
             </Button>
           </div>
         </div>
