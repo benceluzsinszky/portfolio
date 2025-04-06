@@ -65,7 +65,18 @@ export default function HomePage() {
             <Space h="md" />
             In my free time, I enjoy creating games and simulations, try some
             out{" "}
-            <a href="#games" className="text-blue-500 hover:underline">
+            <a
+              href="#games"
+              className="text-blue-500 hover:underline"
+              onClick={(e) => {
+                if (window.innerWidth < 768) {
+                  e.preventDefault();
+                  alert(
+                    "Oops!\n\nGames are only available on desktop for now."
+                  );
+                }
+              }}
+            >
               here
             </a>
             .
