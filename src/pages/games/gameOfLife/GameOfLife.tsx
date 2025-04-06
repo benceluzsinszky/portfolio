@@ -81,25 +81,6 @@ export default function GameOfLife() {
     const grid = gridRef.current;
     if (!grid) return;
 
-    const parseHsl = (color: string): HslColor => {
-      const match = color.match(
-        /hsl\(\s*(-?\d+)\s*,\s*(-?\d+)%\s*,\s*(-?\d+)%\s*\)/
-      );
-
-      if (!match) return { h: 32, s: 74, l: 80 };
-
-      const [, h, s, l] = match;
-      return {
-        h: parseInt(h, 10),
-        s: parseInt(s, 10),
-        l: parseInt(l, 10),
-      };
-    };
-
-    const parseColorString = (hslColor: HslColor): string => {
-      return `hsl(${hslColor.h}, ${hslColor.s}%, ${hslColor.l}%)`;
-    };
-
     const addPixelAtMouse = (event: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       const x = Math.floor((event.clientX - rect.left) / pixelSize);
