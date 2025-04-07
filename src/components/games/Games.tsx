@@ -5,7 +5,7 @@ import GameCard from "./GameCard";
 
 export default function Games() {
   return (
-    <div className="flex flex-row items-center justify-evenly flex-wrap w-full">
+    <div className="flex flex-row items-center justify-evenly flex-wrap gap-5 w-full">
       <GameCard
         title="Falling Sand"
         description="A falling sand game simulation."

@@ -65,18 +65,7 @@ export default function HomePage() {
             <Space h="md" />
             In my free time, I enjoy creating games and simulations, try some
             out{" "}
-            <a
-              href="#games"
-              className="text-blue-500 hover:underline"
-              onClick={(e) => {
-                if (window.innerWidth < 768) {
-                  e.preventDefault();
-                  alert(
-                    "Oops!\n\nGames are only available on desktop for now."
-                  );
-                }
-              }}
-            >
+            <a href="#games" className="text-blue-500 hover:underline">
               here
             </a>
             .
@@ -103,7 +92,7 @@ export default function HomePage() {
             </ShowCase>
           </div>
         </section>
-        <section className="hidden md:flex flex-col items-start md:items-center space-y-5 md:space-y-10 ">
+        <section className="flex flex-col items-start md:items-center space-y-5 md:space-y-10 ">
           <h2 className="text-center" id="games">
             Games
           </h2>
