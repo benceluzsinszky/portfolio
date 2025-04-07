@@ -165,6 +165,36 @@ export default function FallingSand() {
       mouseDownRef.current = false;
     };
 
+    const handleTouchStart = (event: TouchEvent) => {
+      mouseDownRef.current = true;
+      event.preventDefault();
+      const touch = event.touches[0];
+      if (touch) {
+        // Call addSandAtMouse with a simulated MouseEvent-like object
+        addSandAtMouse({
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+        } as MouseEvent);
+      }
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      if (mouseDownRef.current) {
+        event.preventDefault();
+        const touch = event.touches[0];
+        if (touch) {
+          addSandAtMouse({
+            clientX: touch.clientX,
+            clientY: touch.clientY,
+          } as MouseEvent);
+        }
+      }
+    };
+
+    const handleTouchEnd = () => {
+      mouseDownRef.current = false;
+    };
+
     const gravity = () => {
       const newGrid = gridRef.current.map((row) => [...row]);
 
@@ -237,12 +267,21 @@ export default function FallingSand() {
     canvas.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
 
+    canvas.addEventListener("touchstart", handleTouchStart);
+    canvas.addEventListener("touchmove", handleTouchMove);
+    canvas.addEventListener("touchend", handleTouchEnd);
+
     render();
 
     return () => {
       canvas.removeEventListener("mousedown", handleMouseDown);
       canvas.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+
+      canvas.removeEventListener("touchstart", handleTouchStart);
+      canvas.removeEventListener("touchmove", handleTouchMove);
+      canvas.removeEventListener("touchend", handleTouchEnd);
+
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
