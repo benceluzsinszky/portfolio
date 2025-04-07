@@ -41,7 +41,13 @@ export default function FallingSand() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number | null>(null);
 
-  const canvasSize = Math.floor(window.innerWidth / 3);
+  let canvasSize = Math.floor(window.innerWidth / 3);
+  if (window.innerWidth < 768) {
+    canvasSize = Math.min(
+      Math.floor(window.innerHeight / 2),
+      Math.floor(window.innerWidth * 0.9)
+    );
+  }
   const pixelSize = canvasSize / resolution;
 
   const gridRef = useRef<string[][]>(
@@ -275,17 +281,18 @@ export default function FallingSand() {
       </Helmet>
 
       <h1 className="text-center mb-10">Falling Sand Simulation</h1>
-      <div className="flex flex-col md:flex-row items-start justify-between h-full">
+      <div className="flex flex-col md:flex-row items-center md:items-start justify-between h-full mx-2">
         <canvas ref={canvasRef} className="border border-slate-50"></canvas>
-        <div className="w-1/3">
-          <h3 className="mt-0">Descirption</h3>
-          <p>
-            This is a simple falling sand simulation. You can add sand by
-            clicking on the canvas. The sand will fall down and spread out
-            naturally.
-          </p>
+        <div className="w-full md:w-1/3">
+          <div className="hidden md:block">
+            <h3 className="mt-5 md:mt-0">Descirption</h3>
+            <p>
+              This is a simple falling sand simulation. You can add sand by
+              clicking on the canvas. The sand will fall down and spread out
+              naturally.
+            </p>
+          </div>
           <Space h="lg" />
-
           <h3>Pick a color</h3>
           <ColorPicker
             format="hsl"
@@ -345,6 +352,14 @@ export default function FallingSand() {
             >
               Apply Shader
             </Button>
+          </div>
+          <div className="bloc md:hidden">
+            <h3 className="mt-5 md:mt-0">Descirption</h3>
+            <p>
+              This is a simple falling sand simulation. You can add sand by
+              clicking on the canvas. The sand will fall down and spread out
+              naturally.
+            </p>
           </div>
         </div>
       </div>
